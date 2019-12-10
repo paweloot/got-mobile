@@ -27,8 +27,6 @@ class MtnRangeFragment : Fragment() {
         binding = FragmentMtnRangeBinding.inflate(inflater)
 
         binding.lifecycleOwner = this
-        binding.viewModel = viewModel
-
         binding.mtnRangeList.layoutManager = LinearLayoutManager(context)
 
         observeMtnRanges()
