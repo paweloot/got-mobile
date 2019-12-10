@@ -2,33 +2,26 @@ package com.paweloot.gotmobile.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.paweloot.gotmobile.api.GotApi
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MtnRangeRepository {
 
-    private lateinit var mtnRangesLiveData: LiveData<List<MtnRange>>
+    private val mtnRangesLiveData = MutableLiveData<List<MtnRange>>()
 
     fun getLiveData(): LiveData<List<MtnRange>> {
 
-        val call: Call<List<MtnRange>> = GotApi.retrofitService.getMtnRanges()
+        val mtnRanges = listOf(
+            MtnRange(
+                1,
+                "Tatry i Podtatrze",
+                "https://www.tatry-przewodnik.com.pl/images/jaworowe-turnie-1.jpg"
+            ),
+            MtnRange(
+                2, "Beskidy Wschodnie",
+                "https://www.smartage.pl/wp-content/uploads/2017/08/2743786.jpg"
+            )
+        )
 
-        call.enqueue(object : Callback<List<MtnRange>> {
-            override fun onResponse(
-                call: Call<List<MtnRange>>,
-                response: Response<List<MtnRange>>
-            ) {
-
-                val mtnRanges = response.body()
-                if (mtnRanges != null) {
-                    mtnRangesLiveData = MutableLiveData(mtnRanges)
-                }
-            }
-
-            override fun onFailure(call: Call<List<MtnRange>>, t: Throwable) {}
-        })
+        mtnRangesLiveData.value = mtnRanges
 
         return mtnRangesLiveData
     }
