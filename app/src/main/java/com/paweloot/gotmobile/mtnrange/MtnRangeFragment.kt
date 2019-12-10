@@ -37,7 +37,7 @@ class MtnRangeFragment : Fragment() {
     private fun observeMtnRanges() {
         viewModel.getMtnRanges().observe(this, Observer { mtnRanges ->
 
-            binding.mtnRangeList.adapter = MtnRangeAdapter(mtnRanges)
+            binding.mtnRangeList.adapter = MtnRangeAdapter(requireContext(), mtnRanges)
         })
     }
 
