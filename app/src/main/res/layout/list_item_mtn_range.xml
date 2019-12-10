@@ -8,6 +8,10 @@
         <variable
             name="mtnRange"
             type="com.paweloot.gotmobile.model.MtnRange" />
+
+        <variable
+            name="handler"
+            type="com.paweloot.gotmobile.mtnrange.Handler" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -17,6 +21,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
+        android:onClick="@{handler::onMtnRangeClick}"
         app:cardElevation="4dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout

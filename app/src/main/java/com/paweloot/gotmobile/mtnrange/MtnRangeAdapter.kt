@@ -14,6 +14,8 @@ class MtnRangeAdapter(private val mtnRanges: List<MtnRange>) :
         val inflater = LayoutInflater.from(parent.context)
         val binding = ListItemMtnRangeBinding.inflate(inflater, parent, false)
 
+        binding.handler = Handler()
+
         return MtnRangeHolder(binding)
     }
 
