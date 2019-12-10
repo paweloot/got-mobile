@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.paweloot.gotmobile.api.MtnRange
+import com.paweloot.gotmobile.model.MtnRange
 import com.paweloot.gotmobile.databinding.FragmentMtnRangeBinding
 
 
@@ -30,13 +30,21 @@ class MtnRangeFragment : Fragment() {
 
         binding.mtnRangeList.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = MtnRangeAdapter(listOf(MtnRange(1, "Tatry i Podtatrze")))
+            adapter = MtnRangeAdapter(listOf(
+                MtnRange(
+                    1,
+                    "Tatry i Podtatrze"
+                )
+            ))
         }
 
         viewModel.response.observe(this, Observer { response ->
             binding.mtnRangeList.adapter = MtnRangeAdapter(
                 listOf(
-                    MtnRange(1, "Tatry i Podtatrze"),
+                    MtnRange(
+                        1,
+                        "Tatry i Podtatrze"
+                    ),
                     MtnRange(2, "Beskidy Wschodnie")
                 )
             )

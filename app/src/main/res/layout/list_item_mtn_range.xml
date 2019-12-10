@@ -7,7 +7,7 @@
 
         <variable
             name="mtnRange"
-            type="com.paweloot.gotmobile.api.MtnRange" />
+            type="com.paweloot.gotmobile.model.MtnRange" />
     </data>
 
     <androidx.cardview.widget.CardView

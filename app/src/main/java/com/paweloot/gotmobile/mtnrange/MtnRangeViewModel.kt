@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.paweloot.gotmobile.api.GotApi
-import com.paweloot.gotmobile.api.MtnRange
+import com.paweloot.gotmobile.model.MtnRange
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -1,5 +1,6 @@
 package com.paweloot.gotmobile.api
 
+import com.paweloot.gotmobile.model.MtnRange
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import retrofit2.Call

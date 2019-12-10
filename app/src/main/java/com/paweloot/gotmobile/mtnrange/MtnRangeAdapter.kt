@@ -3,8 +3,8 @@ package com.paweloot.gotmobile.mtnrange
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.paweloot.gotmobile.api.MtnRange
 import com.paweloot.gotmobile.databinding.ListItemMtnRangeBinding
+import com.paweloot.gotmobile.model.MtnRange
 
 class MtnRangeAdapter(private val mtnRanges: List<MtnRange>) :
     RecyclerView.Adapter<MtnRangeAdapter.MtnRangeHolder>() {

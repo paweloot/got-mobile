@@ -1,4 +1,4 @@
-package com.paweloot.gotmobile.api
+package com.paweloot.gotmobile.model
 
 import com.squareup.moshi.Json
 
