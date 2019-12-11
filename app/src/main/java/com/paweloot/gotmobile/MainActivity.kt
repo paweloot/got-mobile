@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private fun setUpNavController() {
         navController = findNavController(R.id.nav_host_fragment)
 
-        appViewModel.getNewDestination().observe(this, Observer {
+        appViewModel.newDestination.observe(this, Observer {
             navigateTo(it)
         })
     }

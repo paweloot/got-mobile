@@ -14,6 +14,6 @@ class OnClickHandler(
     fun onMtnRangeClicked(view: View) {
 
         appViewModel.mtnRange.value = mtnRange
-        appViewModel.setNewDestination(navDirections.actionId)
+        appViewModel.newDestination.value = navDirections.actionId
     }
 }
