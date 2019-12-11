@@ -40,10 +40,8 @@
             android:id="@+id/view"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:alpha="0.4"
+            android:alpha="0.5"
             android:background="@color/colorPrimary"
-            android:backgroundTint="@color/colorPrimary"
-            android:backgroundTintMode="multiply"
             app:layout_constraintBottom_toBottomOf="@+id/mtn_range_photo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/mtn_range_photo" />
