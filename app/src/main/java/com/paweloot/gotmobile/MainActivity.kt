@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,11 +20,12 @@ class MainActivity : AppCompatActivity() {
 
         appViewModel = ViewModelProviders.of(this).get(AppViewModel::class.java)
 
-        setUpNavController()
+        setUpNavigation()
     }
 
-    private fun setUpNavController() {
+    private fun setUpNavigation() {
         navController = findNavController(R.id.nav_host_fragment)
+        setupActionBarWithNavController(navController)
 
         appViewModel.newDestination.observe(this, Observer {
             navigateTo(it)
@@ -32,5 +34,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigateTo(destination: Int) {
         navController.navigate(destination)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        navController.navigateUp()
+        return true
     }
 }
