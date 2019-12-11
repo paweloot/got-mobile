@@ -9,19 +9,13 @@ class MtnGroupRepository {
 
     fun getLiveData(): LiveData<List<MtnGroup>> {
 
-        val mtnRanges = listOf(
-            MtnRange(
-                1,
-                "Tatry i Podtatrze",
-                "https://www.tatry-przewodnik.com.pl/images/jaworowe-turnie-1.jpg"
-            ),
-            MtnRange(
-                2, "Beskidy Wschodnie",
-                "https://www.smartage.pl/wp-content/uploads/2017/08/2743786.jpg"
-            )
+        val mtnGroups = listOf(
+            MtnGroup(1, "T.01", "Tatry Wysokie", 1),
+            MtnGroup(2, "T.02", "Tatry Zachodnie", 1),
+            MtnGroup(3, "T.03", "Podtatrze", 1)
         )
 
-        mtnGroupsLiveData.value = null
+        mtnGroupsLiveData.value = mtnGroups
 
         return mtnGroupsLiveData
     }
