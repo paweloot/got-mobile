@@ -96,4 +96,5 @@
     </string>
     <string name="start_input_text_hint">Start</string>
     <string name="end_input_text_hint">Koniec</string>
+    <string name="location_marker_icon">Location marker icon</string>
 </resources>
