@@ -3,6 +3,7 @@ package com.paweloot.gotmobile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.paweloot.gotmobile.model.MtnRange
 
 class AppViewModel : ViewModel() {
 
@@ -15,4 +16,6 @@ class AppViewModel : ViewModel() {
     fun setNewDestination(destinationId: Int) {
         newDestination.value = destinationId
     }
+
+    val mtnRange = MutableLiveData<MtnRange>()
 }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.databinding.FragmentMtnGroupBinding
 
 
@@ -25,6 +26,10 @@ class MtnGroupFragment : Fragment() {
 
         binding = FragmentMtnGroupBinding.inflate(inflater)
 
+        val appViewModel =
+            ViewModelProviders.of(requireActivity()).get(AppViewModel::class.java)
+
+        binding.mtnRange = appViewModel.mtnRange.value
 
         observeMtnRanges()
 

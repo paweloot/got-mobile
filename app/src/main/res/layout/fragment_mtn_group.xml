@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="mtnRange"
+            type="com.paweloot.gotmobile.model.MtnRange" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -23,6 +30,7 @@
             android:contentDescription="@string/selected_mountain_range_photo"
             android:scaleType="centerCrop"
             android:visibility="visible"
+            app:imageUrl="@{mtnRange.url}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -48,6 +56,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
+            android:text="@{mtnRange.name}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"
             android:textColor="@android:color/primary_text_dark"
             android:textSize="24sp"

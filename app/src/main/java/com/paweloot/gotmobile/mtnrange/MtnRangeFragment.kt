@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.databinding.FragmentMtnRangeBinding
 
 
@@ -16,6 +17,8 @@ class MtnRangeFragment : Fragment() {
     private val viewModel: MtnRangeViewModel by lazy {
         ViewModelProviders.of(this).get(MtnRangeViewModel::class.java)
     }
+
+    private lateinit var appViewModel: AppViewModel
 
     private lateinit var binding: FragmentMtnRangeBinding
 
@@ -29,6 +32,8 @@ class MtnRangeFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.mtnRangeList.layoutManager = LinearLayoutManager(context)
 
+        appViewModel = ViewModelProviders.of(requireActivity()).get(AppViewModel::class.java)
+
         observeMtnRanges()
 
         return binding.root
@@ -37,7 +42,7 @@ class MtnRangeFragment : Fragment() {
     private fun observeMtnRanges() {
         viewModel.getMtnRanges().observe(this, Observer { mtnRanges ->
 
-            binding.mtnRangeList.adapter = MtnRangeAdapter(requireContext(), mtnRanges)
+            binding.mtnRangeList.adapter = MtnRangeAdapter(appViewModel, mtnRanges)
         })
     }
 
