@@ -21,5 +21,19 @@
     <fragment
         android:id="@+id/mtnGroupFragment"
         android:name="com.paweloot.gotmobile.mtngroup.MtnGroupFragment"
-        android:label="MtnGroupFragment" />
+        android:label="fragment_mtn_group"
+        tools:layout="@layout/fragment_mtn_group">
+        <action
+            android:id="@+id/openTripFragment"
+            app:destination="@id/tripFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripFragment"
+        android:name="com.paweloot.gotmobile.trip.TripFragment"
+        android:label="fragment_trip"
+        tools:layout="@layout/fragment_trip" />
 </navigation>
