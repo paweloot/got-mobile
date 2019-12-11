@@ -25,11 +25,7 @@
         tools:layout="@layout/fragment_mtn_group">
         <action
             android:id="@+id/openTripFragment"
-            app:destination="@id/tripFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:destination="@id/tripFragment" />
     </fragment>
     <fragment
         android:id="@+id/tripFragment"
