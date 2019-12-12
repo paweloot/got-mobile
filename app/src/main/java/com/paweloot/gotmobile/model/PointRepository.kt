@@ -26,4 +26,12 @@ class PointRepository {
 
         return pointsLiveData
     }
+
+    fun filterPointList() {
+        val filteredPoints = pointsLiveData.value?.filter { point ->
+            point.height > 1000
+        }
+
+        pointsLiveData.value = filteredPoints
+    }
 }

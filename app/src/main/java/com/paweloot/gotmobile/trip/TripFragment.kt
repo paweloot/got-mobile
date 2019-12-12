@@ -53,7 +53,7 @@ class TripFragment : Fragment(), PointAdapter.OnPointClickListener {
         binding.pointList.layoutManager = LinearLayoutManager(context)
         binding.pointList.adapter = PointAdapter(this)
 
-        viewModel.getPoints().observe(this, Observer { points ->
+        viewModel.points.observe(this, Observer { points ->
             (binding.pointList.adapter as PointAdapter).setData(points)
         })
     }
@@ -69,6 +69,8 @@ class TripFragment : Fragment(), PointAdapter.OnPointClickListener {
                 SELECT_END_POINT -> {
                     binding.pointListLabel.text =
                         getString(R.string.end_point_label)
+
+                    filterPointList()
                 }
                 SELECT_VIA_POINT -> {
                     binding.pointListLabel.text =
@@ -80,6 +82,10 @@ class TripFragment : Fragment(), PointAdapter.OnPointClickListener {
                 }
             }
         })
+    }
+
+    private fun filterPointList() {
+        viewModel.filterPointList()
     }
 
     override fun onClick(v: View?) {
@@ -96,6 +102,5 @@ class TripFragment : Fragment(), PointAdapter.OnPointClickListener {
                 viewModel.currentState.value = POINTS_SELECTED
             }
         }
-
     }
 }

@@ -10,8 +10,10 @@ class TripViewModel : ViewModel() {
 
     private val pointRepository = PointRepository()
 
-    fun getPoints(): LiveData<List<Point>> {
-        return pointRepository.getLiveData()
+    val points: LiveData<List<Point>> = pointRepository.getLiveData()
+
+    fun filterPointList() {
+        pointRepository.filterPointList()
     }
 
     var currentState = MutableLiveData<Int>(SELECT_START_POINT)
