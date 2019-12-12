@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -12,7 +13,7 @@ import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.R
 import com.paweloot.gotmobile.databinding.FragmentTripBinding
 
-class TripFragment : Fragment() {
+class TripFragment : Fragment(), PointAdapter.OnPointClickListener {
 
     private lateinit var binding: FragmentTripBinding
 
@@ -50,7 +51,7 @@ class TripFragment : Fragment() {
 
     private fun setUpPointList() {
         binding.pointList.layoutManager = LinearLayoutManager(context)
-        binding.pointList.adapter = PointAdapter()
+        binding.pointList.adapter = PointAdapter(this)
 
         viewModel.getPoints().observe(this, Observer { points ->
             (binding.pointList.adapter as PointAdapter).setData(points)
@@ -75,5 +76,12 @@ class TripFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onClick(v: View?) {
+
+        val pointName: TextView? = v?.findViewById(R.id.point_name)
+
+        binding.startInput.setText(pointName?.text)
     }
 }
