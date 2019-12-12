@@ -17,10 +17,9 @@ class PointRepository {
             Point(5, "Rusinowa Polana", 1210, 1),
             Point(6, "Łysa Polana", 970, 1),
             Point(7, "Wodogrzmoty Mickiewicza", 1100, 1),
-            Point(8, "Wodogrzmoty Mickiewicza", 1100, 1),
-            Point(9, "Schronisko PTTK w Roztoce", 1031, 1),
-            Point(10, "Schronisko PTTK nad Morskim Okiem", 1406, 1),
-            Point(11, "Siklawa", 1666, 1)
+            Point(8, "Schronisko PTTK w Roztoce", 1031, 1),
+            Point(9, "Schronisko PTTK nad Morskim Okiem", 1406, 1),
+            Point(10, "Siklawa", 1666, 1)
         )
 
         pointsLiveData.value = points
