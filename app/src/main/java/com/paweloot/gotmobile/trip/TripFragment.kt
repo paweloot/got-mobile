@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paweloot.gotmobile.AppViewModel
+import com.paweloot.gotmobile.R
 import com.paweloot.gotmobile.databinding.FragmentTripBinding
 
 class TripFragment : Fragment() {
@@ -34,6 +35,7 @@ class TripFragment : Fragment() {
 
         setUpBindingVariables()
         setUpPointList()
+        observeCurrentState()
 
         return binding.root
     }
@@ -52,6 +54,26 @@ class TripFragment : Fragment() {
 
         viewModel.getPoints().observe(this, Observer { points ->
             (binding.pointList.adapter as PointAdapter).setData(points)
+        })
+    }
+
+    private fun observeCurrentState() {
+        viewModel.currentState.observe(this, Observer { state ->
+
+            when (state) {
+                SELECT_START_POINT -> {
+                    binding.pointListLabel.text =
+                        getString(R.string.start_point_label)
+                }
+                SELECT_END_POINT -> {
+                    binding.pointListLabel.text =
+                        getString(R.string.end_point_label)
+                }
+                SELECT_VIA_POINT -> {
+                    binding.pointListLabel.text =
+                        getString(R.string.via_point_label)
+                }
+            }
         })
     }
 }
