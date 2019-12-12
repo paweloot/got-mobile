@@ -20,3 +20,4 @@ class TripViewModel : ViewModel() {
 const val SELECT_START_POINT = 0
 const val SELECT_END_POINT = 1
 const val SELECT_VIA_POINT = 2
+const val POINTS_SELECTED = 3

@@ -74,6 +74,10 @@ class TripFragment : Fragment(), PointAdapter.OnPointClickListener {
                     binding.pointListLabel.text =
                         getString(R.string.via_point_label)
                 }
+                POINTS_SELECTED -> {
+                    binding.pointList.visibility = View.GONE
+                    binding.pointListLabel.visibility = View.GONE
+                }
             }
         })
     }
@@ -82,6 +86,16 @@ class TripFragment : Fragment(), PointAdapter.OnPointClickListener {
 
         val pointName: TextView? = v?.findViewById(R.id.point_name)
 
-        binding.startInput.setText(pointName?.text)
+        when (viewModel.currentState.value) {
+            SELECT_START_POINT -> {
+                binding.startInput.setText(pointName?.text)
+                viewModel.currentState.value = SELECT_END_POINT
+            }
+            SELECT_END_POINT -> {
+                binding.endInput.setText(pointName?.text)
+                viewModel.currentState.value = POINTS_SELECTED
+            }
+        }
+
     }
 }
