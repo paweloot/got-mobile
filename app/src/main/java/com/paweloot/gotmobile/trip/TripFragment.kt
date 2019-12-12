@@ -5,13 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.databinding.FragmentTripBinding
 
 class TripFragment : Fragment() {
 
     private lateinit var binding: FragmentTripBinding
+
+    private val viewModel: TripViewModel by lazy {
+        ViewModelProviders.of(this).get(TripViewModel::class.java)
+    }
 
     private val appViewModel: AppViewModel by lazy {
         ViewModelProviders.of(requireActivity()).get(AppViewModel::class.java)
@@ -27,6 +33,7 @@ class TripFragment : Fragment() {
         binding.lifecycleOwner = this
 
         setUpBindingVariables()
+        setUpPointList()
 
         return binding.root
     }
@@ -37,5 +44,14 @@ class TripFragment : Fragment() {
 
         binding.mtnRange = currMtnRange
         binding.mtnGroup = currMtnGroup
+    }
+
+    private fun setUpPointList() {
+        binding.pointList.layoutManager = LinearLayoutManager(context)
+        binding.pointList.adapter = PointAdapter()
+
+        viewModel.getPoints().observe(this, Observer { points ->
+            (binding.pointList.adapter as PointAdapter).setData(points)
+        })
     }
 }
