@@ -12,4 +12,7 @@
     <string name="start_point_label">Wybierz punkt początkowy</string>
     <string name="end_point_label">Wybierz punkt końcowy</string>
     <string name="via_point_label">Wybierz punkt pośredni</string>
+    <string name="summary">Podsumowanie</string>
+    <string name="path">Odcinek</string>
+    <string name="got">GOT</string>
 </resources>
