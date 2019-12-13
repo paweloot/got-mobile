@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.R
 import com.paweloot.gotmobile.databinding.FragmentTripBinding
+import com.paweloot.gotmobile.model.Point
 
 class TripFragment : Fragment() {
 
@@ -64,10 +65,14 @@ class TripFragment : Fragment() {
             when (viewModel.currentState.value) {
                 SELECT_START_POINT -> {
                     binding.startInput.setText(point.name)
+
+                    addPathPoint(point)
                     setCurrentState(SELECT_END_POINT)
                 }
                 SELECT_END_POINT -> {
                     binding.endInput.setText(point.name)
+
+                    addPathPoint(point)
                     setCurrentState(POINTS_SELECTED)
                 }
             }
@@ -96,6 +101,10 @@ class TripFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun addPathPoint(point: Point) {
+        viewModel.addPathPoint(point)
     }
 
     private fun setCurrentState(state: Int) {
