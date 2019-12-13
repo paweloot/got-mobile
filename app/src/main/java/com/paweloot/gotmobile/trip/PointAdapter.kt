@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.paweloot.gotmobile.R
 import com.paweloot.gotmobile.model.Point
 
-class PointAdapter(private val onPointClickListener: OnPointClickListener) :
+class PointAdapter(private val viewModel: TripViewModel) :
     RecyclerView.Adapter<PointAdapter.PointHolder>() {
 
     private var points = emptyList<Point>()
@@ -23,7 +23,7 @@ class PointAdapter(private val onPointClickListener: OnPointClickListener) :
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_item_point, parent, false)
 
-        return PointHolder(view, onPointClickListener)
+        return PointHolder(view)
     }
 
     override fun onBindViewHolder(holder: PointHolder, position: Int) {
@@ -32,22 +32,17 @@ class PointAdapter(private val onPointClickListener: OnPointClickListener) :
 
     override fun getItemCount() = points.size
 
-    inner class PointHolder(
-        val view: View,
-        onPointClickListener: OnPointClickListener
-    ) :
+    inner class PointHolder(val view: View) :
         RecyclerView.ViewHolder(view) {
 
         private val pointName: TextView = view.findViewById(R.id.point_name)
 
-        init {
-            view.setOnClickListener(onPointClickListener)
-        }
-
         fun bindPoint(point: Point) {
             pointName.text = point.name
+
+            view.setOnClickListener {
+                viewModel.setSelectedPoint(point)
+            }
         }
     }
-
-    interface OnPointClickListener : View.OnClickListener
 }

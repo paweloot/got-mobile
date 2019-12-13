@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,7 +12,7 @@ import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.R
 import com.paweloot.gotmobile.databinding.FragmentTripBinding
 
-class TripFragment : Fragment(), PointAdapter.OnPointClickListener {
+class TripFragment : Fragment() {
 
     private lateinit var binding: FragmentTripBinding
 
@@ -36,6 +35,7 @@ class TripFragment : Fragment(), PointAdapter.OnPointClickListener {
 
         setUpBindingVariables()
         setUpPointList()
+        observeSelectedPoint()
         observeCurrentState()
 
         return binding.root
@@ -51,10 +51,26 @@ class TripFragment : Fragment(), PointAdapter.OnPointClickListener {
 
     private fun setUpPointList() {
         binding.pointList.layoutManager = LinearLayoutManager(context)
-        binding.pointList.adapter = PointAdapter(this)
+        binding.pointList.adapter = PointAdapter(viewModel)
 
         viewModel.points.observe(this, Observer { points ->
             (binding.pointList.adapter as PointAdapter).setData(points)
+        })
+    }
+
+    private fun observeSelectedPoint() {
+        viewModel.selectedPoint.observe(this, Observer { point ->
+
+            when (viewModel.currentState.value) {
+                SELECT_START_POINT -> {
+                    binding.startInput.setText(point.name)
+                    setCurrentState(SELECT_END_POINT)
+                }
+                SELECT_END_POINT -> {
+                    binding.endInput.setText(point.name)
+                    setCurrentState(POINTS_SELECTED)
+                }
+            }
         })
     }
 
@@ -69,8 +85,6 @@ class TripFragment : Fragment(), PointAdapter.OnPointClickListener {
                 SELECT_END_POINT -> {
                     binding.pointListLabel.text =
                         getString(R.string.end_point_label)
-
-                    filterPointList()
                 }
                 SELECT_VIA_POINT -> {
                     binding.pointListLabel.text =
@@ -84,23 +98,7 @@ class TripFragment : Fragment(), PointAdapter.OnPointClickListener {
         })
     }
 
-    private fun filterPointList() {
-        viewModel.filterPointList()
-    }
-
-    override fun onClick(v: View?) {
-
-        val pointName: TextView? = v?.findViewById(R.id.point_name)
-
-        when (viewModel.currentState.value) {
-            SELECT_START_POINT -> {
-                binding.startInput.setText(pointName?.text)
-                viewModel.currentState.value = SELECT_END_POINT
-            }
-            SELECT_END_POINT -> {
-                binding.endInput.setText(pointName?.text)
-                viewModel.currentState.value = POINTS_SELECTED
-            }
-        }
+    private fun setCurrentState(state: Int) {
+        viewModel.currentState.value = state
     }
 }
