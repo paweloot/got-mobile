@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.R
 import com.paweloot.gotmobile.databinding.FragmentTripBinding
@@ -36,8 +35,12 @@ class TripFragment : Fragment() {
         binding = FragmentTripBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
+        val pointsFragment = PointsFragment(viewModel)
+        requireFragmentManager().beginTransaction()
+            .add(R.id.fragment_container, pointsFragment)
+            .commit()
+
         setUpBindingVariables()
-        setUpPointList()
         observeSelectedPoint()
         observeCurrentState()
 
@@ -50,15 +53,6 @@ class TripFragment : Fragment() {
 
         binding.mtnRange = currMtnRange
         binding.mtnGroup = currMtnGroup
-    }
-
-    private fun setUpPointList() {
-        binding.pointList.layoutManager = LinearLayoutManager(context)
-        binding.pointList.adapter = PointAdapter(viewModel)
-
-        viewModel.points.observe(this, Observer { points ->
-            (binding.pointList.adapter as PointAdapter).setData(points)
-        })
     }
 
     private fun observeSelectedPoint() {
@@ -83,25 +77,13 @@ class TripFragment : Fragment() {
 
     private fun observeCurrentState() {
         viewModel.currentState.observe(this, Observer { state ->
-
             when (state) {
-                SELECT_START_POINT -> {
-                    binding.pointListLabel.text =
-                        getString(R.string.start_point_label)
-                }
-                SELECT_END_POINT -> {
-                    binding.pointListLabel.text =
-                        getString(R.string.end_point_label)
-                }
-                SELECT_VIA_POINT -> {
-                    binding.pointListLabel.text =
-                        getString(R.string.via_point_label)
-                }
                 POINTS_SELECTED -> {
-                    binding.pointList.visibility = View.GONE
-                    binding.pointListLabel.visibility = View.GONE
+                    val summaryFragment = SummaryFragment()
 
-                    showSummary()
+                    requireFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, summaryFragment)
+                        .commit()
                 }
             }
         })
