@@ -13,10 +13,6 @@ import kotlinx.android.synthetic.main.fragment_points.*
 
 class PointsFragment(private val viewModel: TripViewModel) : Fragment() {
 
-//    private val viewModel: TripViewModel by lazy {
-//        ViewModelProviders.of(requireParentFragment()).get(TripViewModel::class.java)
-//    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

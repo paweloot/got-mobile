@@ -10,8 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.R
 import com.paweloot.gotmobile.databinding.FragmentTripBinding
-import com.paweloot.gotmobile.model.Path
-import com.paweloot.gotmobile.model.PathRepository
 import com.paweloot.gotmobile.model.Point
 
 class TripFragment : Fragment() {
@@ -79,7 +77,7 @@ class TripFragment : Fragment() {
         viewModel.currentState.observe(this, Observer { state ->
             when (state) {
                 POINTS_SELECTED -> {
-                    val summaryFragment = SummaryFragment()
+                    val summaryFragment = SummaryFragment(viewModel)
 
                     requireFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, summaryFragment)
@@ -87,29 +85,6 @@ class TripFragment : Fragment() {
                 }
             }
         })
-    }
-
-    private fun showSummary() {
-        val pathPoints = viewModel.pathPoints
-        val paths = PathRepository().paths.value!!
-
-        for (i in 0 until pathPoints.size - 1) {
-            val idFrom = pathPoints[i].id
-            val idTo = pathPoints[i + 1].id
-
-            val gotPoints = calculateGotPoints(idFrom, idTo, paths)
-        }
-    }
-
-    private fun calculateGotPoints(idFrom: Int, idTo: Int, paths: List<Path>): Int {
-        for (path in paths) {
-            if (path.idFrom == idFrom && path.idTo == idTo)
-                return path.gotPoints
-            else if (path.idTo == idFrom && path.idFrom == idTo)
-                return path.gotPointsReturn
-        }
-
-        return 0
     }
 
     private fun addPathPoint(point: Point) {
