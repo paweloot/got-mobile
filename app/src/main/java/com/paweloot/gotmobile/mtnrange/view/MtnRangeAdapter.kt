@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.databinding.ListItemMtnRangeBinding
 import com.paweloot.gotmobile.model.entity.MtnRange
-import com.paweloot.gotmobile.mtnrange.MtnRangeFragmentDirections
 
 class MtnRangeAdapter(
     private val appViewModel: AppViewModel,

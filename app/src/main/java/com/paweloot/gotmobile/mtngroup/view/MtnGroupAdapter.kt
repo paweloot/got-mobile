@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.databinding.ListItemMtnGroupBinding
 import com.paweloot.gotmobile.model.entity.MtnGroup
-import com.paweloot.gotmobile.mtngroup.MtnGroupFragmentDirections
 
 class MtnGroupAdapter(
     private val appViewModel: AppViewModel,
