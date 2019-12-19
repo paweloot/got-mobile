@@ -1,4 +1,4 @@
-package com.paweloot.gotmobile.trip
+package com.paweloot.gotmobile.trip.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,11 @@ import androidx.lifecycle.ViewModelProviders
 import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.R
 import com.paweloot.gotmobile.databinding.FragmentTripBinding
-import com.paweloot.gotmobile.model.Point
+import com.paweloot.gotmobile.model.entity.Point
+import com.paweloot.gotmobile.trip.POINTS_SELECTED
+import com.paweloot.gotmobile.trip.SELECT_END_POINT
+import com.paweloot.gotmobile.trip.SELECT_START_POINT
+import com.paweloot.gotmobile.trip.TripViewModel
 
 class TripFragment : Fragment() {
 
@@ -33,7 +37,8 @@ class TripFragment : Fragment() {
         binding = FragmentTripBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        val pointsFragment = PointsFragment(viewModel)
+        val pointsFragment =
+            PointsFragment(viewModel)
         requireFragmentManager().beginTransaction()
             .add(R.id.fragment_container, pointsFragment)
             .commit()
@@ -77,7 +82,10 @@ class TripFragment : Fragment() {
         viewModel.currentState.observe(this, Observer { state ->
             when (state) {
                 POINTS_SELECTED -> {
-                    val summaryFragment = SummaryFragment(viewModel)
+                    val summaryFragment =
+                        SummaryFragment(
+                            viewModel
+                        )
 
                     requireFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, summaryFragment)

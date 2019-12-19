@@ -1,4 +1,4 @@
-package com.paweloot.gotmobile.mtnrange
+package com.paweloot.gotmobile.mtnrange.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.databinding.FragmentMtnRangeBinding
+import com.paweloot.gotmobile.mtnrange.MtnRangeViewModel
 
 
 class MtnRangeFragment : Fragment() {
@@ -42,7 +43,11 @@ class MtnRangeFragment : Fragment() {
     private fun observeMtnRanges() {
         viewModel.getMtnRanges().observe(this, Observer { mtnRanges ->
 
-            binding.mtnRangeList.adapter = MtnRangeAdapter(appViewModel, mtnRanges)
+            binding.mtnRangeList.adapter =
+                MtnRangeAdapter(
+                    appViewModel,
+                    mtnRanges
+                )
         })
     }
 

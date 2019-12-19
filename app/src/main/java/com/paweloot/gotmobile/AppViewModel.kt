@@ -2,8 +2,8 @@ package com.paweloot.gotmobile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.paweloot.gotmobile.model.MtnGroup
-import com.paweloot.gotmobile.model.MtnRange
+import com.paweloot.gotmobile.model.entity.MtnGroup
+import com.paweloot.gotmobile.model.entity.MtnRange
 
 class AppViewModel : ViewModel() {
 

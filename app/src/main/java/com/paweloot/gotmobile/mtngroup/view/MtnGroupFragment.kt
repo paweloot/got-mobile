@@ -1,4 +1,4 @@
-package com.paweloot.gotmobile.mtngroup
+package com.paweloot.gotmobile.mtngroup.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.databinding.FragmentMtnGroupBinding
+import com.paweloot.gotmobile.mtngroup.MtnGroupViewModel
 
 
 class MtnGroupFragment : Fragment() {
@@ -44,7 +45,11 @@ class MtnGroupFragment : Fragment() {
     private fun observeMtnGroups() {
         viewModel.getMtnGroups().observe(this, Observer { mtnGroups ->
 
-            binding.mtnGroupList.adapter = MtnGroupAdapter(appViewModel, mtnGroups)
+            binding.mtnGroupList.adapter =
+                MtnGroupAdapter(
+                    appViewModel,
+                    mtnGroups
+                )
         })
     }
 

@@ -7,11 +7,11 @@
 
         <variable
             name="mtnRange"
-            type="com.paweloot.gotmobile.model.MtnRange" />
+            type="com.paweloot.gotmobile.model.entity.MtnRange" />
 
         <variable
             name="handler"
-            type="com.paweloot.gotmobile.mtnrange.OnClickHandler" />
+            type="com.paweloot.gotmobile.mtnrange.view.OnClickHandler" />
     </data>
 
     <androidx.cardview.widget.CardView

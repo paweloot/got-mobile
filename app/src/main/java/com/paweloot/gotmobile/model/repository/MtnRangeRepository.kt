@@ -1,7 +1,8 @@
-package com.paweloot.gotmobile.model
+package com.paweloot.gotmobile.model.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.paweloot.gotmobile.model.entity.MtnRange
 
 class MtnRangeRepository {
 

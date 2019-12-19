@@ -7,7 +7,7 @@
 
         <variable
             name="mtnRange"
-            type="com.paweloot.gotmobile.model.MtnRange" />
+            type="com.paweloot.gotmobile.model.entity.MtnRange" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

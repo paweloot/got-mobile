@@ -1,4 +1,4 @@
-package com.paweloot.gotmobile.trip
+package com.paweloot.gotmobile.trip.view
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,4 +1,4 @@
-package com.paweloot.gotmobile.model
+package com.paweloot.gotmobile.model.entity
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

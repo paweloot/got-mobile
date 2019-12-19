@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mtnRangeFragment"
-        android:name="com.paweloot.gotmobile.mtnrange.MtnRangeFragment"
+        android:name="com.paweloot.gotmobile.mtnrange.view.MtnRangeFragment"
         android:label="Planowanie trasy"
         tools:layout="@layout/fragment_mtn_range">
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/mtnGroupFragment"
-        android:name="com.paweloot.gotmobile.mtngroup.MtnGroupFragment"
+        android:name="com.paweloot.gotmobile.mtngroup.view.MtnGroupFragment"
         android:label="Grupy górskie"
         tools:layout="@layout/fragment_mtn_group">
         <action
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/tripFragment"
-        android:name="com.paweloot.gotmobile.trip.TripFragment"
+        android:name="com.paweloot.gotmobile.trip.view.TripFragment"
         android:label="Trasa"
         tools:layout="@layout/fragment_trip" />
 </navigation>

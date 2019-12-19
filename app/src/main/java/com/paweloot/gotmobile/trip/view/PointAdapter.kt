@@ -1,4 +1,4 @@
-package com.paweloot.gotmobile.trip
+package com.paweloot.gotmobile.trip.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.paweloot.gotmobile.R
-import com.paweloot.gotmobile.model.Point
+import com.paweloot.gotmobile.model.entity.Point
+import com.paweloot.gotmobile.trip.TripViewModel
 
 class PointAdapter(private val viewModel: TripViewModel) :
     RecyclerView.Adapter<PointAdapter.PointHolder>() {

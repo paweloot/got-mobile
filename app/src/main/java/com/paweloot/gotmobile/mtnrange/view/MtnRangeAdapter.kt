@@ -1,11 +1,12 @@
-package com.paweloot.gotmobile.mtnrange
+package com.paweloot.gotmobile.mtnrange.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.databinding.ListItemMtnRangeBinding
-import com.paweloot.gotmobile.model.MtnRange
+import com.paweloot.gotmobile.model.entity.MtnRange
+import com.paweloot.gotmobile.mtnrange.MtnRangeFragmentDirections
 
 class MtnRangeAdapter(
     private val appViewModel: AppViewModel,
@@ -24,8 +25,14 @@ class MtnRangeAdapter(
     override fun onBindViewHolder(holder: MtnRangeHolder, position: Int) {
         holder.binding.mtnRange = mtnRanges[position]
 
-        val navDirection = MtnRangeFragmentDirections.openMtnGroupFragment()
-        holder.binding.handler = OnClickHandler(mtnRanges[position], appViewModel, navDirection)
+        val navDirection =
+            MtnRangeFragmentDirections.openMtnGroupFragment()
+        holder.binding.handler =
+            OnClickHandler(
+                mtnRanges[position],
+                appViewModel,
+                navDirection
+            )
     }
 
     override fun getItemCount() = mtnRanges.size

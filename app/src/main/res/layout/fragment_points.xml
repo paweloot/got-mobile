@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".trip.PointsFragment">
+    tools:context=".trip.view.PointsFragment">
 
     <TextView
         android:id="@+id/point_list_label"

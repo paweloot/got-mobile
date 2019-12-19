@@ -1,4 +1,4 @@
-package com.paweloot.gotmobile.trip
+package com.paweloot.gotmobile.trip.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paweloot.gotmobile.R
-import com.paweloot.gotmobile.model.Path
-import com.paweloot.gotmobile.model.PathRepository
+import com.paweloot.gotmobile.model.entity.Path
+import com.paweloot.gotmobile.model.repository.PathRepository
+import com.paweloot.gotmobile.trip.TripViewModel
 import kotlinx.android.synthetic.main.fragment_summary.*
 
 class SummaryFragment(private val viewModel: TripViewModel) : Fragment() {
@@ -40,11 +41,17 @@ class SummaryFragment(private val viewModel: TripViewModel) : Fragment() {
             val gotPoints = calculateGotPoints(idFrom, idTo, paths)
             val fromName = pathPoints.find { point -> point.id == idFrom }!!.name
             val toName = pathPoints.find { point -> point.id == idTo }!!.name
-            summaryPaths.add(SummaryPath("$fromName - $toName", gotPoints))
+            summaryPaths.add(
+                SummaryPath(
+                    "$fromName - $toName",
+                    gotPoints
+                )
+            )
         }
 
         summary_path_list.layoutManager = LinearLayoutManager(context)
-        summary_path_list.adapter = PathAdapter(summaryPaths)
+        summary_path_list.adapter =
+            PathAdapter(summaryPaths)
     }
 
     private fun calculateGotPoints(idFrom: Int, idTo: Int, paths: List<Path>): Int {

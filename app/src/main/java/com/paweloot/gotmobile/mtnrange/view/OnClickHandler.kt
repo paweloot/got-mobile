@@ -1,9 +1,9 @@
-package com.paweloot.gotmobile.mtnrange
+package com.paweloot.gotmobile.mtnrange.view
 
 import android.view.View
 import androidx.navigation.NavDirections
 import com.paweloot.gotmobile.AppViewModel
-import com.paweloot.gotmobile.model.MtnRange
+import com.paweloot.gotmobile.model.entity.MtnRange
 
 class OnClickHandler(
     private val mtnRange: MtnRange,
