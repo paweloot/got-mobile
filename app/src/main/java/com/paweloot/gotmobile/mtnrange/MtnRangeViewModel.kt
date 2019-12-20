@@ -11,6 +11,6 @@ class MtnRangeViewModel : ViewModel() {
         MtnRangeRepository()
 
     fun getMtnRanges(): LiveData<List<MtnRange>> {
-        return mtnRangeRepository.getLiveData()
+        return mtnRangeRepository.mtnRanges
     }
 }

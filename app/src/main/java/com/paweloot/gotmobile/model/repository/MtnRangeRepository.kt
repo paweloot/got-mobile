@@ -1,29 +1,36 @@
 package com.paweloot.gotmobile.model.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.paweloot.gotmobile.api.RetrofitApi
 import com.paweloot.gotmobile.model.entity.MtnRange
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MtnRangeRepository {
 
-    private val mtnRangesLiveData = MutableLiveData<List<MtnRange>>()
+    private val _mtnRanges = MutableLiveData<List<MtnRange>>()
+    val mtnRanges: LiveData<List<MtnRange>> = _mtnRanges
 
-    fun getLiveData(): LiveData<List<MtnRange>> {
+    init {
+        fetchMtnRanges()
+    }
 
-        val mtnRanges = listOf(
-            MtnRange(
-                1,
-                "Tatry i Podtatrze",
-                "https://www.tatry-przewodnik.com.pl/images/jaworowe-turnie-1.jpg"
-            ),
-            MtnRange(
-                2, "Beskidy Wschodnie",
-                "https://www.smartage.pl/wp-content/uploads/2017/08/2743786.jpg"
-            )
-        )
+    private fun fetchMtnRanges() {
 
-        mtnRangesLiveData.value = mtnRanges
+        RetrofitApi.gotApi.getMtnRanges().enqueue(object : Callback<List<MtnRange>> {
+            override fun onFailure(call: Call<List<MtnRange>>, t: Throwable) {
+                Log.d("MtnRangeRepository", "onFailure: $t")
+            }
 
-        return mtnRangesLiveData
+            override fun onResponse(
+                call: Call<List<MtnRange>>,
+                response: Response<List<MtnRange>>
+            ) {
+                _mtnRanges.value = response.body()
+            }
+        })
     }
 }
