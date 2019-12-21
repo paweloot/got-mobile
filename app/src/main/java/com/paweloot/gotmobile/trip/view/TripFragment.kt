@@ -38,7 +38,7 @@ class TripFragment : Fragment() {
         binding.lifecycleOwner = this
 
         val pointsFragment =
-            PointsFragment(viewModel)
+            PointsFragment(viewModel, appViewModel)
         requireFragmentManager().beginTransaction()
             .add(R.id.fragment_container, pointsFragment)
             .commit()

@@ -3,6 +3,7 @@ package com.paweloot.gotmobile.trip
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.paweloot.gotmobile.model.entity.MtnGroup
 import com.paweloot.gotmobile.model.entity.Point
 import com.paweloot.gotmobile.model.repository.PointRepository
 
@@ -13,13 +14,12 @@ const val POINTS_SELECTED = 3
 
 class TripViewModel : ViewModel() {
 
-    private val pointRepository =
-        PointRepository()
+    private val pointRepository = PointRepository()
 
-    val points: LiveData<List<Point>> = pointRepository.getLiveData()
+    val points: LiveData<List<Point>> = pointRepository.points
 
-    fun filterPointList(pointFromId: Int) {
-        pointRepository.filterPointList()
+    fun fetchPoints(mtnGroup: MtnGroup) {
+        pointRepository.fetchPoints(mtnGroup)
     }
 
     private val _selectedPoint = MutableLiveData<Point>()

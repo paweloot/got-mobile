@@ -2,6 +2,7 @@ package com.paweloot.gotmobile.api
 
 import com.paweloot.gotmobile.model.entity.MtnGroup
 import com.paweloot.gotmobile.model.entity.MtnRange
+import com.paweloot.gotmobile.model.entity.Point
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import retrofit2.Call
@@ -20,6 +21,10 @@ interface GotApi {
     @GET("mtnRanges/{mtnRangeId}/mtnGroups")
     fun getMtnGroups(@Path("mtnRangeId") mtnRangeId: Int):
             Call<List<MtnGroup>>
+
+    @GET("mtnGroups/{mtnGroupId}/points")
+    fun getPoints(@Path("mtnGroupId") mtnGroupId: Int):
+            Call<List<Point>>
 }
 
 private val moshi = Moshi.Builder()

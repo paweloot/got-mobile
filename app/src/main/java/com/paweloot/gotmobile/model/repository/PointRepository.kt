@@ -1,78 +1,32 @@
 package com.paweloot.gotmobile.model.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.paweloot.gotmobile.api.RetrofitApi
+import com.paweloot.gotmobile.model.entity.MtnGroup
 import com.paweloot.gotmobile.model.entity.Point
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+private const val TAG = "PointRepository"
 
 class PointRepository {
 
-    private val pointsLiveData = MutableLiveData<List<Point>>()
+    private val _points = MutableLiveData<List<Point>>()
+    val points: LiveData<List<Point>> = _points
 
-    fun getLiveData(): LiveData<List<Point>> {
+    fun fetchPoints(mtnGroup: MtnGroup) {
 
-        val points = listOf(
-            Point(
-                1,
-                "Palenica Białczańska",
-                984,
-                1
-            ),
-            Point(
-                2,
-                "Polana pod Wołoszynem",
-                1250,
-                1
-            ),
-            Point(
-                3,
-                "Wierch Poroniec",
-                1101,
-                1
-            ),
-            Point(
-                4,
-                "Dolina Filipka",
-                944,
-                1
-            ),
-            Point(
-                5,
-                "Rusinowa Polana",
-                1210,
-                1
-            ),
-            Point(6, "Łysa Polana", 970, 1),
-            Point(
-                7,
-                "Wodogrzmoty Mickiewicza",
-                1100,
-                1
-            ),
-            Point(
-                8,
-                "Schronisko PTTK w Roztoce",
-                1031,
-                1
-            ),
-            Point(
-                9,
-                "Schronisko PTTK nad Morskim Okiem",
-                1406,
-                1
-            ),
-            Point(10, "Siklawa", 1666, 1)
-        )
+        RetrofitApi.gotApi.getPoints(mtnGroup.id).enqueue(object : Callback<List<Point>> {
+            override fun onFailure(call: Call<List<Point>>, t: Throwable) {
+                Log.d(TAG, "onFailure: Failed to fetch Points: $t")
+            }
 
-        pointsLiveData.value = points
-
-        return pointsLiveData
-    }
-
-    fun filterPointList() {
-        val filteredPoints = pointsLiveData.value?.filter { point ->
-            point.height > 1000
-        }
-
-        pointsLiveData.value = filteredPoints
+            override fun onResponse(call: Call<List<Point>>, response: Response<List<Point>>) {
+                _points.value = response.body()
+            }
+        })
     }
 }

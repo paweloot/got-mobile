@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.R
 import com.paweloot.gotmobile.trip.SELECT_END_POINT
 import com.paweloot.gotmobile.trip.SELECT_START_POINT
@@ -15,7 +16,10 @@ import com.paweloot.gotmobile.trip.TripViewModel
 import kotlinx.android.synthetic.main.fragment_points.*
 
 
-class PointsFragment(private val viewModel: TripViewModel) : Fragment() {
+class PointsFragment(
+    private val viewModel: TripViewModel,
+    private val appViewModel: AppViewModel
+) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +39,9 @@ class PointsFragment(private val viewModel: TripViewModel) : Fragment() {
         viewModel.points.observe(this, Observer { points ->
             (point_list.adapter as PointAdapter).setData(points)
         })
+
+        val currentMtnGroup = appViewModel.mtnGroup.value!!
+        viewModel.fetchPoints(currentMtnGroup)
 
         observeCurrentState()
     }
