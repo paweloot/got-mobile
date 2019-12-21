@@ -9,6 +9,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+private const val TAG = "MtnRangeRepository"
+
 class MtnRangeRepository {
 
     private val _mtnRanges = MutableLiveData<List<MtnRange>>()
@@ -22,7 +24,7 @@ class MtnRangeRepository {
 
         RetrofitApi.gotApi.getMtnRanges().enqueue(object : Callback<List<MtnRange>> {
             override fun onFailure(call: Call<List<MtnRange>>, t: Throwable) {
-                Log.d("MtnRangeRepository", "onFailure: $t")
+                Log.d(TAG, "onFailure: Failed to fetch MtnRanges: $t")
             }
 
             override fun onResponse(

@@ -39,6 +39,8 @@ class MtnGroupFragment : Fragment() {
 
         observeMtnGroups()
 
+        viewModel.fetchMtnGroups(appViewModel.mtnRange.value!!)
+
         return binding.root
     }
 
