@@ -22,7 +22,8 @@ class PathAdapter(private val summaryPaths: List<SummaryPath>) :
     override fun onBindViewHolder(holder: PathHolder, position: Int) {
         val summaryPath = summaryPaths[position]
 
-        holder.fromTo.text = summaryPath.fromTo
+        val path = "${summaryPath.from} - ${summaryPath.to}"
+        holder.fromTo.text = path
         holder.points.text = summaryPath.points.toString()
     }
 
