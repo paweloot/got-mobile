@@ -37,8 +37,3 @@ class SummaryFragment(private val viewModel: TripViewModel) : Fragment() {
     }
 }
 
-data class SummaryPath(
-    val from: String,
-    val to: String,
-    val points: Int
-)

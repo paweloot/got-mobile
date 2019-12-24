@@ -3,7 +3,7 @@ package com.paweloot.gotmobile.api
 import com.paweloot.gotmobile.model.entity.MtnGroup
 import com.paweloot.gotmobile.model.entity.MtnRange
 import com.paweloot.gotmobile.model.entity.Point
-import com.paweloot.gotmobile.trip.view.SummaryPath
+import com.paweloot.gotmobile.model.entity.SummaryPath
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import retrofit2.Call

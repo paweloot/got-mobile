@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.paweloot.gotmobile.api.RetrofitApi
 import com.paweloot.gotmobile.model.entity.MtnGroup
 import com.paweloot.gotmobile.model.entity.Point
+import com.paweloot.gotmobile.model.entity.SummaryPath
 import com.paweloot.gotmobile.model.repository.PointRepository
-import com.paweloot.gotmobile.trip.view.SummaryPath
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

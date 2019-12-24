@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.paweloot.gotmobile.R
+import com.paweloot.gotmobile.model.entity.SummaryPath
 
 class PathAdapter(private val summaryPaths: List<SummaryPath>) :
     RecyclerView.Adapter<PathAdapter.PathHolder>() {
