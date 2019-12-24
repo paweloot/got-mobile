@@ -15,4 +15,5 @@
     <string name="summary">Podsumowanie</string>
     <string name="path">Odcinek</string>
     <string name="got">GOT</string>
+    <string name="add_via_point_menu">Dodaj punkt pośredni</string>
 </resources>

@@ -1,9 +1,7 @@
 package com.paweloot.gotmobile.trip.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -33,6 +31,7 @@ class TripFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
 
         binding = FragmentTripBinding.inflate(inflater)
         binding.lifecycleOwner = this
@@ -50,12 +49,26 @@ class TripFragment : Fragment() {
         return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.trip_menu, menu)
+    }
+
     private fun setUpBindingVariables() {
         val currMtnRange = appViewModel.mtnRange.value
         val currMtnGroup = appViewModel.mtnGroup.value
 
         binding.mtnRange = currMtnRange
         binding.mtnGroup = currMtnGroup
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.add_via_point -> {
+
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun observeSelectedPoint() {
