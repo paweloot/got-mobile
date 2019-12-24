@@ -1,5 +1,6 @@
 package com.paweloot.gotmobile.trip
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,40 +18,38 @@ const val SELECT_END_POINT = 1
 const val SELECT_VIA_POINT = 2
 const val POINTS_SELECTED = 3
 
+private const val TAG = "TripViewModel"
+
 class TripViewModel : ViewModel() {
 
     private val pointRepository = PointRepository()
 
+    private val _selectedPoint = MutableLiveData<Point>()
+    private val _pathPoints: MutableList<Point> = mutableListOf()
+    private val _summaryPaths = MutableLiveData<List<SummaryPath>>()
+
     val points: LiveData<List<Point>> = pointRepository.points
+    val selectedPoint: LiveData<Point> = _selectedPoint
+    val summaryPaths: LiveData<List<SummaryPath>> = _summaryPaths
+    var currentState = MutableLiveData<Int>(SELECT_START_POINT)
 
     fun fetchPoints(mtnGroup: MtnGroup) {
         pointRepository.fetchPoints(mtnGroup)
     }
 
-    private val _selectedPoint = MutableLiveData<Point>()
-    val selectedPoint: LiveData<Point> = _selectedPoint
-
     fun setSelectedPoint(point: Point) {
         _selectedPoint.value = point
     }
-
-    var currentState = MutableLiveData<Int>(SELECT_START_POINT)
-
-    private val _pathPoints: MutableList<Point> = mutableListOf()
-    val pathPoints: List<Point> = _pathPoints
 
     fun addPathPoint(point: Point) {
         _pathPoints.add(point)
     }
 
-    private val _summaryPaths = MutableLiveData<List<SummaryPath>>()
-    val summaryPaths: LiveData<List<SummaryPath>> = _summaryPaths
-
     fun fetchSummaryPaths() {
-        RetrofitApi.gotApi.getSummaryPaths(pathPoints.map { point -> point.id }).enqueue(object :
+        RetrofitApi.gotApi.getSummaryPaths(_pathPoints.map { point -> point.id }).enqueue(object :
             Callback<List<SummaryPath>> {
             override fun onFailure(call: Call<List<SummaryPath>>, t: Throwable) {
-
+                Log.d(TAG, "onFailure: Failed to fetch SummaryPaths: $t")
             }
 
             override fun onResponse(
