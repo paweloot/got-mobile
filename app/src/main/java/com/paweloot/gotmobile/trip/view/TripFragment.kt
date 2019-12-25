@@ -9,10 +9,7 @@ import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.R
 import com.paweloot.gotmobile.databinding.FragmentTripBinding
 import com.paweloot.gotmobile.model.entity.Point
-import com.paweloot.gotmobile.trip.POINTS_SELECTED
-import com.paweloot.gotmobile.trip.SELECT_END_POINT
-import com.paweloot.gotmobile.trip.SELECT_START_POINT
-import com.paweloot.gotmobile.trip.TripViewModel
+import com.paweloot.gotmobile.trip.*
 
 class TripFragment : Fragment() {
 
@@ -64,7 +61,9 @@ class TripFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.add_via_point -> {
-
+                if (viewModel.currentState.value == SELECT_END_POINT) {
+                    viewModel.currentState.value = SELECT_VIA_POINT
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -94,6 +93,10 @@ class TripFragment : Fragment() {
     private fun observeCurrentState() {
         viewModel.currentState.observe(this, Observer { state ->
             when (state) {
+                SELECT_VIA_POINT -> {
+                    binding.startInput.text = null
+                    binding.startInputLayout.hint = getString(R.string.via_input_text_hint)
+                }
                 POINTS_SELECTED -> {
                     val summaryFragment =
                         SummaryFragment(
