@@ -80,6 +80,12 @@ class TripFragment : Fragment() {
                     addPathPoint(point)
                     setCurrentState(SELECT_END_POINT)
                 }
+                SELECT_VIA_POINT -> {
+                    binding.startInput.setText(point.name)
+
+                    addPathPoint(point)
+                    setCurrentState(SELECT_END_POINT)
+                }
                 SELECT_END_POINT -> {
                     binding.endInput.setText(point.name)
 
