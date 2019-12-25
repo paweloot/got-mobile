@@ -29,6 +29,10 @@ interface GotApi {
     fun getPoints(@Path("mtnGroupId") mtnGroupId: Int):
             Call<List<Point>>
 
+    @GET("points/pointsFrom/{pointFromId}")
+    fun getFilteredPoints(@Path("pointFromId") pointFromId: Int):
+            Call<List<Point>>
+
     @POST("summaryPaths")
     fun getSummaryPaths(@Body pointsIds: List<Int>):
             Call<List<SummaryPath>>

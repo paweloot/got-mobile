@@ -79,12 +79,16 @@ class TripFragment : Fragment() {
 
                     addPathPoint(point)
                     setCurrentState(SELECT_END_POINT)
+
+                    filterPoints()
                 }
                 SELECT_VIA_POINT -> {
                     binding.startInput.setText(point.name)
 
                     addPathPoint(point)
                     setCurrentState(SELECT_END_POINT)
+
+                    filterPoints()
                 }
                 SELECT_END_POINT -> {
                     binding.endInput.setText(point.name)
@@ -123,5 +127,9 @@ class TripFragment : Fragment() {
 
     private fun setCurrentState(state: Int) {
         viewModel.currentState.value = state
+    }
+
+    private fun filterPoints() {
+        viewModel.filterPoints()
     }
 }

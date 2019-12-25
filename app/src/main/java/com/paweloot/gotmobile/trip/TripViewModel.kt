@@ -45,6 +45,10 @@ class TripViewModel : ViewModel() {
         _pathPoints.add(point)
     }
 
+    fun filterPoints() {
+        pointRepository.filterPoints(selectedPoint.value!!)
+    }
+
     fun fetchSummaryPaths() {
         RetrofitApi.gotApi.getSummaryPaths(_pathPoints.map { point -> point.id }).enqueue(object :
             Callback<List<SummaryPath>> {

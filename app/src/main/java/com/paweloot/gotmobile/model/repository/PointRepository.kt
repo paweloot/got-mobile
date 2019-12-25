@@ -29,4 +29,17 @@ class PointRepository {
             }
         })
     }
+
+    fun filterPoints(pointFrom: Point) {
+
+        RetrofitApi.gotApi.getFilteredPoints(pointFrom.id).enqueue(object : Callback<List<Point>> {
+            override fun onFailure(call: Call<List<Point>>, t: Throwable) {
+                Log.d(TAG, "onFailure: Failed to fetch filtered Points: $t")
+            }
+
+            override fun onResponse(call: Call<List<Point>>, response: Response<List<Point>>) {
+                _points.value = response.body()
+            }
+        })
+    }
 }
