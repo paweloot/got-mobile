@@ -17,4 +17,5 @@
     <string name="got">GOT</string>
     <string name="add_via_point_menu">Dodaj punkt pośredni</string>
     <string name="via_input_text_hint">Przez</string>
+    <string name="button_save_path">Zapisz</string>
 </resources>
