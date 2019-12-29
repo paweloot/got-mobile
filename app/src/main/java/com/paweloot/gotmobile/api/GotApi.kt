@@ -1,11 +1,9 @@
 package com.paweloot.gotmobile.api
 
-import com.paweloot.gotmobile.model.entity.MtnGroup
-import com.paweloot.gotmobile.model.entity.MtnRange
-import com.paweloot.gotmobile.model.entity.Point
-import com.paweloot.gotmobile.model.entity.SummaryPath
-import com.squareup.moshi.KotlinJsonAdapterFactory
+import com.paweloot.gotmobile.model.entity.*
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -13,6 +11,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import java.util.*
 
 const val BASE_URL = "http://192.168.43.130:8080/api/"
 
@@ -36,10 +35,21 @@ interface GotApi {
     @POST("summaryPaths")
     fun getSummaryPaths(@Body pointsIds: List<Int>):
             Call<List<SummaryPath>>
+
+    @POST("trips")
+    fun saveTrip(@Body postTripBody: PostTripBody):
+            Call<Trip>
+
+    @GET("tourists/authorize/{email}/{encodedPassword}")
+    fun authorizeTourist(
+        @Path("email") email: String,
+        @Path("encodedPassword") encodedPassword: String
+    ): Call<Tourist>
 }
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
+    .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
     .build()
 
 private val retrofit = Retrofit.Builder()

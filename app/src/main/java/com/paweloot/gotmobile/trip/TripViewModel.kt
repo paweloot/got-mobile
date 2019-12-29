@@ -5,9 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.paweloot.gotmobile.api.RetrofitApi
-import com.paweloot.gotmobile.model.entity.MtnGroup
-import com.paweloot.gotmobile.model.entity.Point
-import com.paweloot.gotmobile.model.entity.SummaryPath
+import com.paweloot.gotmobile.model.entity.*
 import com.paweloot.gotmobile.model.repository.PointRepository
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,6 +15,7 @@ const val SELECT_START_POINT = 0
 const val SELECT_END_POINT = 1
 const val SELECT_VIA_POINT = 2
 const val POINTS_SELECTED = 3
+const val SAVE_TRIP = 4
 
 private const val TAG = "TripViewModel"
 
@@ -61,6 +60,29 @@ class TripViewModel : ViewModel() {
                 response: Response<List<SummaryPath>>
             ) {
                 _summaryPaths.value = response.body()
+            }
+        })
+    }
+
+    fun saveTrip(loggedTourist: Tourist) {
+
+        val gotPoints = summaryPaths.value!!.sumBy { path -> path.points }
+        val pathPointsIds = _pathPoints.map { point -> point.id }
+
+        val postTripBody = PostTripBody(
+            loggedTourist.user.id,
+            null,
+            gotPoints,
+            pathPointsIds
+        )
+
+        RetrofitApi.gotApi.saveTrip(postTripBody).enqueue(object : Callback<Trip> {
+            override fun onFailure(call: Call<Trip>, t: Throwable) {
+                Log.d(TAG, "onFailure: Failed to save the trip: $t")
+            }
+
+            override fun onResponse(call: Call<Trip>, response: Response<Trip>) {
+                Log.d(TAG, "onResponse: Successfully saved the trip!: ${response.body()}")
             }
         })
     }

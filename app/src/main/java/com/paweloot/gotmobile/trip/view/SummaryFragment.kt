@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paweloot.gotmobile.R
+import com.paweloot.gotmobile.trip.SAVE_TRIP
 import com.paweloot.gotmobile.trip.TripViewModel
 import kotlinx.android.synthetic.main.fragment_summary.*
 
@@ -28,6 +29,10 @@ class SummaryFragment(private val viewModel: TripViewModel) : Fragment() {
 
         observeSummaryPaths()
         viewModel.fetchSummaryPaths();
+
+        save_button.setOnClickListener {
+            viewModel.currentState.value = SAVE_TRIP
+        }
     }
 
     private fun observeSummaryPaths() {

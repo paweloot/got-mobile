@@ -117,6 +117,11 @@ class TripFragment : Fragment() {
                         .replace(R.id.fragment_container, summaryFragment)
                         .commit()
                 }
+                SAVE_TRIP -> {
+                    val loggedTourist = appViewModel.loggedTourist!!
+
+                    viewModel.saveTrip(loggedTourist)
+                }
             }
         })
     }
