@@ -1,16 +1,12 @@
 package com.paweloot.gotmobile.trip
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.paweloot.gotmobile.api.RetrofitApi
 import com.paweloot.gotmobile.model.entity.*
 import com.paweloot.gotmobile.model.repository.PointRepository
 import com.paweloot.gotmobile.model.repository.SummaryPathRepository
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.paweloot.gotmobile.model.repository.TripRepository
 import java.util.*
 
 const val SELECT_START_POINT = 0
@@ -25,6 +21,7 @@ class TripViewModel : ViewModel() {
 
     private val pointRepository = PointRepository()
     private val summaryPathRepository = SummaryPathRepository()
+    private val tripRepository = TripRepository()
 
     private val _selectedPoint = MutableLiveData<Point>()
     private val _pathPoints: MutableList<Point> = mutableListOf()
@@ -67,16 +64,8 @@ class TripViewModel : ViewModel() {
             pathPointsIds
         )
 
-        RetrofitApi.gotApi.saveTrip(postTripBody).enqueue(object : Callback<Trip> {
-            override fun onFailure(call: Call<Trip>, t: Throwable) {
-                Log.d(TAG, "onFailure: Failed to save the trip: $t")
-                callback(false)
-            }
-
-            override fun onResponse(call: Call<Trip>, response: Response<Trip>) {
-                Log.d(TAG, "onResponse: Successfully saved the trip!: ${response.body()}")
-                callback(true)
-            }
-        })
+        tripRepository.saveTrip(postTripBody) { success ->
+            callback(success)
+        }
     }
 }
