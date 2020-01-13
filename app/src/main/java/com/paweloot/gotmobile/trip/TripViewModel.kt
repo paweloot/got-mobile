@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.paweloot.gotmobile.api.RetrofitApi
 import com.paweloot.gotmobile.model.entity.*
 import com.paweloot.gotmobile.model.repository.PointRepository
+import com.paweloot.gotmobile.model.repository.SummaryPathRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,14 +24,15 @@ private const val TAG = "TripViewModel"
 class TripViewModel : ViewModel() {
 
     private val pointRepository = PointRepository()
+    private val summaryPathRepository = SummaryPathRepository()
 
     private val _selectedPoint = MutableLiveData<Point>()
     private val _pathPoints: MutableList<Point> = mutableListOf()
-    private val _summaryPaths = MutableLiveData<List<SummaryPath>>()
 
     val points: LiveData<List<Point>> = pointRepository.points
+    val summaryPaths: LiveData<List<SummaryPath>> = summaryPathRepository.summaryPaths
+
     val selectedPoint: LiveData<Point> = _selectedPoint
-    val summaryPaths: LiveData<List<SummaryPath>> = _summaryPaths
     var currentState = MutableLiveData<Int>(SELECT_START_POINT)
 
     fun fetchPoints(mtnGroup: MtnGroup) {
@@ -50,19 +52,7 @@ class TripViewModel : ViewModel() {
     }
 
     fun fetchSummaryPaths() {
-        RetrofitApi.gotApi.getSummaryPaths(_pathPoints.map { point -> point.id }).enqueue(object :
-            Callback<List<SummaryPath>> {
-            override fun onFailure(call: Call<List<SummaryPath>>, t: Throwable) {
-                Log.d(TAG, "onFailure: Failed to fetch SummaryPaths: $t")
-            }
-
-            override fun onResponse(
-                call: Call<List<SummaryPath>>,
-                response: Response<List<SummaryPath>>
-            ) {
-                _summaryPaths.value = response.body()
-            }
-        })
+        summaryPathRepository.fetchSummaryPaths(_pathPoints)
     }
 
     fun saveTrip(loggedTourist: Tourist, selectedDate: Date, callback: (success: Boolean) -> Unit) {
