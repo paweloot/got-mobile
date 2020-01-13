@@ -13,10 +13,10 @@
         <action
             android:id="@+id/openMtnGroupFragment"
             app:destination="@id/mtnGroupFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/mtnGroupFragment"
@@ -25,15 +25,23 @@
         tools:layout="@layout/fragment_mtn_group">
         <action
             android:id="@+id/openTripFragment"
-            app:destination="@id/tripFragment" />
+            app:destination="@id/tripFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/tripFragment"
         android:name="com.paweloot.gotmobile.trip.view.TripFragment"
         android:label="Trasa"
-        tools:layout="@layout/fragment_trip" >
+        tools:layout="@layout/fragment_trip">
         <action
             android:id="@+id/action_tripFragment_to_mtnRangeFragment"
-            app:destination="@id/mtnRangeFragment" />
+            app:destination="@id/mtnRangeFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 </navigation>
