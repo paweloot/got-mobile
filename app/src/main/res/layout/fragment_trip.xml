@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:focusable="false"
-                android:inputType="none"
+                android:inputType="textNoSuggestions"
                 android:outlineProvider="background" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,7 +99,7 @@
                 android:ems="10"
                 android:focusable="false"
                 android:hint="@string/end_input_text_hint"
-                android:inputType="none"
+                android:inputType="textNoSuggestions"
                 android:outlineProvider="background" />
         </com.google.android.material.textfield.TextInputLayout>
 
