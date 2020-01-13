@@ -121,7 +121,7 @@ class TripFragment : Fragment() {
                         .commit()
                 }
                 SAVE_TRIP -> {
-                    val loggedTourist = appViewModel.loggedTourist!!
+                    val loggedTourist = appViewModel.loggedTourist.value!!
 
                     showDatePickerDialog { view, year, month, dayOfMonth ->
                         val calendar = Calendar.getInstance()
