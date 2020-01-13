@@ -28,9 +28,6 @@ class AppViewModel : ViewModel() {
     init {
         val email = "paweloot@gmail.com"
         val bytes = "paweloot".toByteArray(Charset.forName("UTF-8"))
-//        val encodedPassword = MessageDigest.getInstance("SHA-256")
-//            .digest(bytes)
-//            .toString()
         val encodedPassword = Hasher().hash("paweloot")
 
         RetrofitApi.gotApi.authorizeTourist(email, encodedPassword)

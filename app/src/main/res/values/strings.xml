@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">GOT Mobile</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="mountain_range_image">Mountain Range Image</string>
     <string name="selected_mountain_range_photo">Selected Mountain Range photo</string>
     <string name="start_input_text_hint">Start</string>
@@ -18,4 +16,9 @@
     <string name="add_via_point_menu">Dodaj punkt pośredni</string>
     <string name="via_input_text_hint">Przez</string>
     <string name="button_save_path">Zapisz</string>
+    <string name="button_continue">Kontynuuj</string>
+    <string name="dialog_success_content">Stworzoną trasę możesz znaleźć na panelu głównym.</string>
+    <string name="dialog_success_title">Pomyślnie zapisano!</string>
+    <string name="dialog_failure_title">Błąd serwera!</string>
+    <string name="dialog_failure_content">Trasa nie została zapisana, spróbuj ponownie.</string>
 </resources>

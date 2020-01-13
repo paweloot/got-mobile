@@ -64,7 +64,7 @@ class TripViewModel : ViewModel() {
         })
     }
 
-    fun saveTrip(loggedTourist: Tourist) {
+    fun saveTrip(loggedTourist: Tourist, callback: (success: Boolean) -> Unit) {
 
         val gotPoints = summaryPaths.value!!.sumBy { path -> path.points }
         val pathPointsIds = _pathPoints.map { point -> point.id }
@@ -79,10 +79,12 @@ class TripViewModel : ViewModel() {
         RetrofitApi.gotApi.saveTrip(postTripBody).enqueue(object : Callback<Trip> {
             override fun onFailure(call: Call<Trip>, t: Throwable) {
                 Log.d(TAG, "onFailure: Failed to save the trip: $t")
+                callback(false)
             }
 
             override fun onResponse(call: Call<Trip>, response: Response<Trip>) {
                 Log.d(TAG, "onResponse: Successfully saved the trip!: ${response.body()}")
+                callback(true)
             }
         })
     }

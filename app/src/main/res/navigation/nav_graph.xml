@@ -31,5 +31,9 @@
         android:id="@+id/tripFragment"
         android:name="com.paweloot.gotmobile.trip.view.TripFragment"
         android:label="Trasa"
-        tools:layout="@layout/fragment_trip" />
+        tools:layout="@layout/fragment_trip" >
+        <action
+            android:id="@+id/action_tripFragment_to_mtnRangeFragment"
+            app:destination="@id/mtnRangeFragment" />
+    </fragment>
 </navigation>

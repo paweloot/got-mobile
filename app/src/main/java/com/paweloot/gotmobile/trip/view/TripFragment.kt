@@ -120,10 +120,15 @@ class TripFragment : Fragment() {
                 SAVE_TRIP -> {
                     val loggedTourist = appViewModel.loggedTourist!!
 
-                    viewModel.saveTrip(loggedTourist)
+                    viewModel.saveTrip(loggedTourist, this::onTripSavedCallback)
                 }
             }
         })
+    }
+
+    private fun onTripSavedCallback(success: Boolean) {
+        val dialog = MessageDialogFragment(success)
+        dialog.show(requireFragmentManager(), null)
     }
 
     private fun addPathPoint(point: Point) {
