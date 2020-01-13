@@ -1,7 +1,9 @@
 package com.paweloot.gotmobile.trip.view
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.*
+import android.widget.DatePicker
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -10,6 +12,7 @@ import com.paweloot.gotmobile.R
 import com.paweloot.gotmobile.databinding.FragmentTripBinding
 import com.paweloot.gotmobile.model.entity.Point
 import com.paweloot.gotmobile.trip.*
+import java.util.*
 
 class TripFragment : Fragment() {
 
@@ -120,7 +123,17 @@ class TripFragment : Fragment() {
                 SAVE_TRIP -> {
                     val loggedTourist = appViewModel.loggedTourist!!
 
-                    viewModel.saveTrip(loggedTourist, this::onTripSavedCallback)
+                    showDatePickerDialog { view, year, month, dayOfMonth ->
+                        val calendar = Calendar.getInstance()
+                        calendar.set(year, month, dayOfMonth)
+                        val selectedDate = calendar.time
+
+                        viewModel.saveTrip(
+                            loggedTourist,
+                            selectedDate,
+                            this::onTripSavedCallback
+                        )
+                    }
                 }
             }
         })
@@ -129,6 +142,30 @@ class TripFragment : Fragment() {
     private fun onTripSavedCallback(success: Boolean) {
         val dialog = MessageDialogFragment(success)
         dialog.show(requireFragmentManager(), null)
+    }
+
+    private fun showDatePickerDialog(
+        onDateSetCallback: (
+            datePicker: DatePicker,
+            year: Int,
+            month: Int,
+            dayOfMonth: Int
+        ) -> Unit
+    ) {
+        Calendar.getInstance().also { c ->
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val dayOfMonth = c.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(
+                requireContext(),
+                onDateSetCallback,
+                year, month, dayOfMonth
+            )
+
+            datePickerDialog.datePicker.minDate = Calendar.getInstance().timeInMillis
+            datePickerDialog.show()
+        }
     }
 
     private fun addPathPoint(point: Point) {

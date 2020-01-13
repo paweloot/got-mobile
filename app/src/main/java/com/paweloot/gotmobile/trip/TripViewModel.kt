@@ -10,6 +10,7 @@ import com.paweloot.gotmobile.model.repository.PointRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 const val SELECT_START_POINT = 0
 const val SELECT_END_POINT = 1
@@ -64,14 +65,14 @@ class TripViewModel : ViewModel() {
         })
     }
 
-    fun saveTrip(loggedTourist: Tourist, callback: (success: Boolean) -> Unit) {
+    fun saveTrip(loggedTourist: Tourist, selectedDate: Date, callback: (success: Boolean) -> Unit) {
 
         val gotPoints = summaryPaths.value!!.sumBy { path -> path.points }
         val pathPointsIds = _pathPoints.map { point -> point.id }
 
         val postTripBody = PostTripBody(
             loggedTourist.user.id,
-            null,
+            selectedDate,
             gotPoints,
             pathPointsIds
         )
