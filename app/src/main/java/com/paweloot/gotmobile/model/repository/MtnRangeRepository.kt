@@ -25,6 +25,7 @@ class MtnRangeRepository {
         RetrofitApi.gotApi.getMtnRanges().enqueue(object : Callback<List<MtnRange>> {
             override fun onFailure(call: Call<List<MtnRange>>, t: Throwable) {
                 Log.d(TAG, "onFailure: Failed to fetch MtnRanges: $t")
+                _mtnRanges.value = null
             }
 
             override fun onResponse(

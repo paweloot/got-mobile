@@ -1,5 +1,6 @@
 package com.paweloot.gotmobile.mtngroup.view
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paweloot.gotmobile.AppViewModel
+import com.paweloot.gotmobile.R
 import com.paweloot.gotmobile.databinding.FragmentMtnGroupBinding
 import com.paweloot.gotmobile.mtngroup.MtnGroupViewModel
 
@@ -47,11 +49,21 @@ class MtnGroupFragment : Fragment() {
     private fun observeMtnGroups() {
         viewModel.getMtnGroups().observe(this, Observer { mtnGroups ->
 
-            binding.mtnGroupList.adapter =
-                MtnGroupAdapter(
-                    appViewModel,
-                    mtnGroups
-                )
+            if (mtnGroups == null) {
+                val alertDialog = AlertDialog.Builder(context)
+                    .setMessage(getString(R.string.alert_dialog_failed_to_connect))
+                    .setPositiveButton(
+                        R.string.button_continue
+                    ) { dialogInterface, i -> dialogInterface.dismiss() }
+
+                alertDialog.show()
+            } else {
+                binding.mtnGroupList.adapter =
+                    MtnGroupAdapter(
+                        appViewModel,
+                        mtnGroups
+                    )
+            }
         })
     }
 
