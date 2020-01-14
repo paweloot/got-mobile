@@ -58,6 +58,9 @@ class MtnGroupFragment : Fragment() {
 
                 alertDialog.show()
             } else {
+                binding.progressCircular.visibility = View.GONE
+                binding.mtnGroupList.visibility = View.VISIBLE
+
                 binding.mtnGroupList.adapter =
                     MtnGroupAdapter(
                         appViewModel,
