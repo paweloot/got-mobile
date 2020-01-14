@@ -54,14 +54,12 @@ class MtnRangeFragment : Fragment() {
 
                 alertDialog.show()
             } else {
-                binding.progressCircular.visibility = View.GONE
-                binding.mtnRangeList.visibility = View.VISIBLE
+                binding.apply {
+                    progressCircular.visibility = View.GONE
+                    mtnRangeList.visibility = View.VISIBLE
 
-                binding.mtnRangeList.adapter =
-                    MtnRangeAdapter(
-                        appViewModel,
-                        mtnRanges
-                    )
+                    mtnRangeList.adapter = MtnRangeAdapter(appViewModel, mtnRanges)
+                }
             }
         })
     }
