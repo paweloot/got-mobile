@@ -10,7 +10,5 @@ class MtnRangeViewModel : ViewModel() {
     private val mtnRangeRepository: MtnRangeRepository =
         MtnRangeRepository()
 
-    fun getMtnRanges(): LiveData<List<MtnRange>> {
-        return mtnRangeRepository.mtnRanges
-    }
+    val mtnRanges: LiveData<List<MtnRange>> = mtnRangeRepository.mtnRanges
 }

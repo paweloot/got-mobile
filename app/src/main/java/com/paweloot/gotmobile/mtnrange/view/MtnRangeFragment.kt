@@ -43,7 +43,7 @@ class MtnRangeFragment : Fragment() {
     }
 
     private fun observeMtnRanges() {
-        viewModel.getMtnRanges().observe(this, Observer { mtnRanges ->
+        viewModel.mtnRanges.observe(this, Observer { mtnRanges ->
 
             if (mtnRanges == null) {
                 val alertDialog = AlertDialog.Builder(context)
