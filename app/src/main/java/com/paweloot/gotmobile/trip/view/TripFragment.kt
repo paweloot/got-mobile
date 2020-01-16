@@ -64,8 +64,8 @@ class TripFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.add_via_point -> {
-                if (viewModel.currentState.value == SELECT_END_POINT) {
-                    viewModel.currentState.value = SELECT_VIA_POINT
+                if (currentState() == SELECT_END_POINT) {
+                    changeStateTo(SELECT_VIA_POINT)
                 }
                 true
             }
@@ -76,12 +76,12 @@ class TripFragment : Fragment() {
     private fun observeSelectedPoint() {
         viewModel.selectedPoint.observe(this, Observer { point ->
 
-            when (viewModel.currentState.value) {
+            when (currentState()) {
                 SELECT_START_POINT -> {
                     binding.startInput.setText(point.name)
 
                     addPathPoint(point)
-                    setCurrentState(SELECT_END_POINT)
+                    changeStateTo(SELECT_END_POINT)
 
                     filterPoints()
                 }
@@ -89,7 +89,7 @@ class TripFragment : Fragment() {
                     binding.startInput.setText(point.name)
 
                     addPathPoint(point)
-                    setCurrentState(SELECT_END_POINT)
+                    changeStateTo(SELECT_END_POINT)
 
                     filterPoints()
                 }
@@ -97,7 +97,7 @@ class TripFragment : Fragment() {
                     binding.endInput.setText(point.name)
 
                     addPathPoint(point)
-                    setCurrentState(POINTS_SELECTED)
+                    changeStateTo(POINTS_SELECTED)
                 }
             }
         })
@@ -172,8 +172,10 @@ class TripFragment : Fragment() {
         viewModel.addPathPoint(point)
     }
 
-    private fun setCurrentState(state: Int) {
-        viewModel.currentState.value = state
+    private fun currentState() = viewModel.currentState.value
+
+    private fun changeStateTo(state: Int) {
+        viewModel.changeStateTo(state)
     }
 
     private fun filterPoints() {

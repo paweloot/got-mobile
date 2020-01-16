@@ -23,17 +23,18 @@ private const val TAG = "TripViewModel"
  */
 class TripViewModel : ViewModel() {
 
-    private val pointRepository = PointRepository()
+    var pointRepository = PointRepository()
     private val summaryPathRepository = SummaryPathRepository()
     private val tripRepository = TripRepository()
 
+    private val _points = MutableLiveData<List<Point>>()
     private val _selectedPoint = MutableLiveData<Point>()
     private val _pathPoints: MutableList<Point> = mutableListOf()
 
     /**
      * Lista punktów do wyboru aktualnie wyświetlanych użytkownikowi.
      */
-    val points: LiveData<List<Point>> = pointRepository.points
+    val points: LiveData<List<Point>> = _points
 
     /**
      * Lista odcinków w stworzonej trasie wyświetlanych w podsumowaniu.
@@ -52,12 +53,21 @@ class TripViewModel : ViewModel() {
     var currentState = MutableLiveData<Int>(SELECT_START_POINT)
 
     /**
+     * Zmienia aktualny stan na podany.
+     *
+     * @param newState nowy stan
+     */
+    fun changeStateTo(newState: Int) {
+        currentState.value = newState
+    }
+
+    /**
      * Pobiera listę punktów dla podanej grupy górskiej.
      *
      * @param mtnGroup grupa górska dla której mają zostać pobrane punkty.
      */
     fun fetchPoints(mtnGroup: MtnGroup) {
-        pointRepository.fetchPoints(mtnGroup)
+        _points.value = pointRepository.fetchPoints(mtnGroup)
     }
 
     /**

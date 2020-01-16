@@ -31,7 +31,9 @@ class PointRepository {
      *
      * @param mtnGroup wybrana grupa górska
      */
-    fun fetchPoints(mtnGroup: MtnGroup) {
+    fun fetchPoints(mtnGroup: MtnGroup): List<Point>? {
+
+        var points: List<Point>? = null
 
         RetrofitApi.gotApi.getPoints(mtnGroup.id).enqueue(object : Callback<List<Point>> {
             override fun onFailure(call: Call<List<Point>>, t: Throwable) {
@@ -40,8 +42,11 @@ class PointRepository {
 
             override fun onResponse(call: Call<List<Point>>, response: Response<List<Point>>) {
                 _points.value = response.body()
+                points = response.body()
             }
         })
+        
+        return points
     }
 
     /**
