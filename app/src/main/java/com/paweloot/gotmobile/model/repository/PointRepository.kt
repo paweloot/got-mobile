@@ -31,9 +31,7 @@ class PointRepository {
      *
      * @param mtnGroup wybrana grupa górska
      */
-    fun fetchPoints(mtnGroup: MtnGroup): List<Point>? {
-
-        var points: List<Point>? = null
+    fun fetchPoints(mtnGroup: MtnGroup) {
 
         RetrofitApi.gotApi.getPoints(mtnGroup.id).enqueue(object : Callback<List<Point>> {
             override fun onFailure(call: Call<List<Point>>, t: Throwable) {
@@ -42,17 +40,16 @@ class PointRepository {
 
             override fun onResponse(call: Call<List<Point>>, response: Response<List<Point>>) {
                 _points.value = response.body()
-                points = response.body()
             }
         })
-        
-        return points
     }
 
     /**
      * Pobiera punkty z bazy danych, które są osiągalne z wybranego punktu.
      * W przypadku powodzenia operacji, lista przechowywana w klasie jest aktualizowana.
      * W p.p. logowany jest błąd o niepowodzeniu.
+     *
+     * @param pointFrom punkt z
      */
     fun filterPoints(pointFrom: Point) {
 

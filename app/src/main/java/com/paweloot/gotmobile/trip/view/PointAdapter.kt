@@ -14,8 +14,8 @@ class PointAdapter(private val viewModel: TripViewModel) :
 
     private var points = emptyList<Point>()
 
-    fun setData(data: List<Point>) {
-        points = data
+    fun setData(data: List<Point>?) {
+        points = data ?: emptyList()
         notifyDataSetChanged()
     }
 

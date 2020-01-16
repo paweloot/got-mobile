@@ -4,18 +4,14 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
-import com.paweloot.gotmobile.model.entity.MtnGroup
 import com.paweloot.gotmobile.model.entity.Point
-import com.paweloot.gotmobile.model.repository.PointRepository
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentCaptor
 import org.mockito.Captor
 import org.mockito.Mockito
-import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
 inline fun <reified T> mock(): T = Mockito.mock(T::class.java)
@@ -26,28 +22,25 @@ class TripViewModelTest {
     val rule = InstantTaskExecutorRule()
 
     private lateinit var viewModel: TripViewModel
-    private lateinit var pointRepository: PointRepository
-    private lateinit var pointsObserver: Observer<List<Point>>
     private lateinit var stateObserver: Observer<Int>
 
     @Captor
     private lateinit var stateCaptor: ArgumentCaptor<Int>
 
-    @Captor
-    private lateinit var pointsCaptor: ArgumentCaptor<List<Point>>
+    private lateinit var startPoint: Point
+    private lateinit var viaPoint: Point
+    private lateinit var endPoint: Point
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         viewModel = TripViewModel()
-        pointRepository = mock()
         stateObserver = mock()
-        pointsObserver = mock()
-
         viewModel.currentState.observeForever(stateObserver)
 
-        viewModel.pointRepository = pointRepository
-        viewModel.points.observeForever(pointsObserver)
+        startPoint = Point(1, "Palenica Białczańska", 0)
+        viaPoint = Point(2, "Wodogrzmoty Mickiewicza", 0)
+        endPoint = Point(3, "Polana pod Wołoszynem", 0)
     }
 
     @Test
@@ -71,32 +64,18 @@ class TripViewModelTest {
     }
 
     @Test
-    fun fetchPointsSuccessful() {
-        val mtnGroup = MtnGroup(1, "T.01", "Tatry Wysokie")
-        val expectedPoints = listOf(
-            Point(1, "Polana pod Wołoszynem", 1250),
-            Point(2, "Wodogrzmoty Mickiewicza", 1100)
-        )
+    fun addPathPoint() {
+        val pathPoints = viewModel.pathPoints
+        assertEquals(0, pathPoints.size)
+        assertEquals(emptyList<Point>(), pathPoints)
 
-        `when`(pointRepository.fetchPoints(mtnGroup)).thenReturn(expectedPoints)
-        viewModel.fetchPoints(mtnGroup)
+        viewModel.addPathPoint(startPoint)
+        assertEquals(1, pathPoints.size)
+        assertEquals(listOf(startPoint), pathPoints)
 
-        pointsCaptor.run {
-            verify(pointsObserver, times(1)).onChanged(capture())
-            assertEquals(expectedPoints, value)
-        }
-    }
-
-    @Test
-    fun fetchPointsFailure() {
-        val mtnGroup = MtnGroup(12, "S.01", "Góry Izerskie")
-
-        `when`(pointRepository.fetchPoints(mtnGroup)).thenReturn(null)
-        viewModel.fetchPoints(mtnGroup)
-
-        pointsCaptor.run {
-            verify(pointsObserver, times(1)).onChanged(capture())
-            assertNull(value)
-        }
+        viewModel.addPathPoint(viaPoint)
+        viewModel.addPathPoint(endPoint)
+        assertEquals(3, pathPoints.size)
+        assertEquals(listOf(startPoint, viaPoint, endPoint), pathPoints)
     }
 }
