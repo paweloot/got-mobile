@@ -38,6 +38,7 @@ class LoginFragment : Fragment() {
 
             emailInput.clearFocus()
             passwordInput.clearFocus()
+            showProgressBar()
 
             val email = emailInput.text.toString()
             val password = passwordInput.text.toString()
@@ -60,11 +61,11 @@ class LoginFragment : Fragment() {
     }
 
     private fun onLoginFailure() {
+        hideProgressBar()
         showFailureAlert()
     }
 
     private fun onLoginSuccessful() {
-        //TODO
         viewModel.newDestination.value =
             LoginFragmentDirections.actionLoginFragmentToMtnRangeFragment().actionId
     }
@@ -77,5 +78,19 @@ class LoginFragment : Fragment() {
             }
 
         dialog.show()
+    }
+
+    private fun showProgressBar() {
+        emailInputLayout.visibility = View.GONE
+        passwordInputLayout.visibility = View.GONE
+        loginButton.visibility = View.GONE
+        progressCircular.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        progressCircular.visibility = View.GONE
+        emailInputLayout.visibility = View.VISIBLE
+        passwordInputLayout.visibility = View.VISIBLE
+        loginButton.visibility = View.VISIBLE
     }
 }
