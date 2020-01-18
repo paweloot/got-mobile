@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mtnRangeFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/mtnRangeFragment"
@@ -38,6 +38,19 @@
         tools:layout="@layout/fragment_trip">
         <action
             android:id="@+id/action_tripFragment_to_mtnRangeFragment"
+            app:destination="@id/mtnRangeFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.paweloot.gotmobile.login.LoginFragment"
+        android:label="GOT Mobile"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_mtnRangeFragment"
             app:destination="@id/mtnRangeFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_left"

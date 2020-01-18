@@ -19,4 +19,8 @@ class AppViewModel : ViewModel() {
     val mtnRange = MutableLiveData<MtnRange>()
 
     val mtnGroup = MutableLiveData<MtnGroup>()
+
+    fun authorizeTourist(email: String, password: String) {
+        userRepository.authorizeTourist(email, password)
+    }
 }

@@ -22,4 +22,9 @@
     <string name="dialog_failure_title">Błąd serwera!</string>
     <string name="dialog_failure_content">Trasa nie została zapisana, spróbuj ponownie.</string>
     <string name="alert_dialog_failed_to_connect">Nie udało się nawiązać połączenia z serwerem.</string>
+    <string name="login_photo_description">Login photo, mountain panorama</string>
+    <string name="email_hint">E-mail</string>
+    <string name="haslo_hint">Hasło</string>
+    <string name="button_login">Zaloguj</string>
+    <string name="login_screen_title">Zaloguj się</string>
 </resources>

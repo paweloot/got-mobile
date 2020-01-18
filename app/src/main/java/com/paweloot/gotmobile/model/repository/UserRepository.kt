@@ -17,18 +17,15 @@ class UserRepository {
     private val _loggedTourist = MutableLiveData<Tourist>()
     val loggedTourist: LiveData<Tourist> = _loggedTourist
 
-    init {
-        authorizeTourist()
-    }
+    fun authorizeTourist(email: String, password: String) {
 
-    private fun authorizeTourist() {
-        val email = "paweloot@gmail.com"
-        val encodedPassword = Hasher().hash("paweloot")
+        val encodedPassword = Hasher().hash(password)
 
         RetrofitApi.gotApi.authorizeTourist(email, encodedPassword)
             .enqueue(object : Callback<Tourist> {
                 override fun onFailure(call: Call<Tourist>, t: Throwable) {
                     Log.d(TAG, "onFailure: Failed to authorize a tourist $email: $t")
+                    _loggedTourist.value = null
                 }
 
                 override fun onResponse(call: Call<Tourist>, response: Response<Tourist>) {
