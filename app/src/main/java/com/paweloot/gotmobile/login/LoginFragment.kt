@@ -14,11 +14,8 @@ import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = LoginFragment()
-    }
-
     private lateinit var viewModel: AppViewModel
+    private var isLoggingIn: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +36,7 @@ class LoginFragment : Fragment() {
             emailInput.clearFocus()
             passwordInput.clearFocus()
             showProgressBar()
+            isLoggingIn = true
 
             val email = emailInput.text.toString()
             val password = passwordInput.text.toString()
@@ -49,10 +47,11 @@ class LoginFragment : Fragment() {
 
     private fun observeLoggedTourist() {
         viewModel.loggedTourist.observe(this, Observer { tourist ->
-            if (tourist == null)
+            if (tourist == null && isLoggingIn) {
                 onLoginFailure()
-            else
+            } else if (tourist != null)
                 onLoginSuccessful()
+            isLoggingIn = false
         })
     }
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -39,6 +40,13 @@ class MtnRangeFragment : Fragment() {
 
         observeMtnRanges()
 
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    showLogOutAlert()
+                }
+            })
+
         return binding.root
     }
 
@@ -64,4 +72,20 @@ class MtnRangeFragment : Fragment() {
         })
     }
 
+    private fun showLogOutAlert() {
+        val alert = AlertDialog.Builder(context)
+            .setMessage("Ta akcja spowoduje wylogowanie. Na pewno chcesz kontynuować?")
+            .setPositiveButton("Tak") { dialogInterface, _ ->
+                appViewModel.logOutTourist()
+                dialogInterface.dismiss()
+
+                appViewModel.newDestination.value =
+                    MtnRangeFragmentDirections.actionMtnRangeFragmentToLoginFragment().actionId
+            }
+            .setNegativeButton("Nie") { dialogInterface, _ ->
+                dialogInterface.dismiss()
+            }
+
+        alert.show()
+    }
 }

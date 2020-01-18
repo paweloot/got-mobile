@@ -33,4 +33,8 @@ class UserRepository {
                 }
             })
     }
+
+    fun logOut() {
+        _loggedTourist.value = null
+    }
 }

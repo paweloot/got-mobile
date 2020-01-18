@@ -23,4 +23,8 @@ class AppViewModel : ViewModel() {
     fun authorizeTourist(email: String, password: String) {
         userRepository.authorizeTourist(email, password)
     }
+
+    fun logOutTourist() {
+        userRepository.logOut()
+    }
 }
