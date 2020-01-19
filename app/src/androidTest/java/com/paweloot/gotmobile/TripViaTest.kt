@@ -4,8 +4,7 @@ package com.paweloot.gotmobile
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.scrollTo
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
@@ -21,15 +20,61 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class TripTest {
+class TripViaTest {
 
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun tripTest() {
-        val mtnRange = onView(
+    fun tripViaTest() {
+        val textInputEditText = onView(
+            allOf(
+                withId(R.id.emailInput),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.emailInputLayout),
+                        0
+                    ),
+                    0
+                )
+            )
+        )
+        textInputEditText.perform(
+            scrollTo(),
+            replaceText("paweloot@gmail.com"),
+            closeSoftKeyboard()
+        )
+
+        val textInputEditText2 = onView(
+            allOf(
+                withId(R.id.passwordInput),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.passwordInputLayout),
+                        0
+                    ),
+                    0
+                )
+            )
+        )
+        textInputEditText2.perform(scrollTo(), replaceText("paweloot"), closeSoftKeyboard())
+
+        val appCompatButton = onView(
+            allOf(
+                withId(R.id.loginButton), withText("Zaloguj"),
+                childAtPosition(
+                    childAtPosition(
+                        withClassName(`is`("android.widget.ScrollView")),
+                        0
+                    ),
+                    6
+                )
+            )
+        )
+        appCompatButton.perform(scrollTo(), click())
+
+        val cardView = onView(
             allOf(
                 childAtPosition(
                     allOf(
@@ -44,9 +89,9 @@ class TripTest {
                 isDisplayed()
             )
         )
-        mtnRange.perform(click())
+        cardView.perform(click())
 
-        val mtnGroup = onView(
+        val cardView2 = onView(
             allOf(
                 childAtPosition(
                     allOf(
@@ -61,9 +106,9 @@ class TripTest {
                 isDisplayed()
             )
         )
-        mtnGroup.perform(click())
+        cardView2.perform(click())
 
-        val startPoint = onView(
+        val constraintLayout = onView(
             allOf(
                 childAtPosition(
                     allOf(
@@ -78,7 +123,7 @@ class TripTest {
                 isDisplayed()
             )
         )
-        startPoint.perform(click())
+        constraintLayout.perform(click())
 
         val overflowMenuButton = onView(
             allOf(
@@ -95,7 +140,7 @@ class TripTest {
         )
         overflowMenuButton.perform(click())
 
-        val addViaPointOption = onView(
+        val appCompatTextView = onView(
             allOf(
                 withId(R.id.title), withText("Dodaj punkt pośredni"),
                 childAtPosition(
@@ -108,9 +153,9 @@ class TripTest {
                 isDisplayed()
             )
         )
-        addViaPointOption.perform(click())
+        appCompatTextView.perform(click())
 
-        val viaPoint = onView(
+        val constraintLayout2 = onView(
             allOf(
                 childAtPosition(
                     allOf(
@@ -125,9 +170,9 @@ class TripTest {
                 isDisplayed()
             )
         )
-        viaPoint.perform(click())
+        constraintLayout2.perform(click())
 
-        val endPoint = onView(
+        val constraintLayout3 = onView(
             allOf(
                 childAtPosition(
                     allOf(
@@ -142,9 +187,9 @@ class TripTest {
                 isDisplayed()
             )
         )
-        endPoint.perform(click())
+        constraintLayout3.perform(click())
 
-        val saveButton = onView(
+        val appCompatButton2 = onView(
             allOf(
                 withId(R.id.save_button), withText("Zapisz"),
                 childAtPosition(
@@ -157,9 +202,9 @@ class TripTest {
                 isDisplayed()
             )
         )
-        saveButton.perform(click())
+        appCompatButton2.perform(click())
 
-        val calendarOkButton = onView(
+        val appCompatButton3 = onView(
             allOf(
                 withId(android.R.id.button1), withText("OK"),
                 childAtPosition(
@@ -171,9 +216,9 @@ class TripTest {
                 )
             )
         )
-        calendarOkButton.perform(scrollTo(), click())
+        appCompatButton3.perform(scrollTo(), click())
 
-        val continueButton = onView(
+        val appCompatButton4 = onView(
             allOf(
                 withId(android.R.id.button1), withText("Kontynuuj"),
                 childAtPosition(
@@ -185,7 +230,7 @@ class TripTest {
                 )
             )
         )
-        continueButton.perform(scrollTo(), click())
+        appCompatButton4.perform(scrollTo(), click())
     }
 
     private fun childAtPosition(
