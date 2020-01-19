@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.R
-import com.paweloot.gotmobile.login.LoginFragmentDirections
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {

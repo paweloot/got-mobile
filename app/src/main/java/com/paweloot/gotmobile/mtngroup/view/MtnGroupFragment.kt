@@ -47,7 +47,7 @@ class MtnGroupFragment : Fragment() {
     }
 
     private fun observeMtnGroups() {
-        viewModel.getMtnGroups().observe(this, Observer { mtnGroups ->
+        viewModel.mtnGroups.observe(this, Observer { mtnGroups ->
 
             if (mtnGroups == null) {
                 val alertDialog = AlertDialog.Builder(context)

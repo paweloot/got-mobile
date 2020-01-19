@@ -16,11 +16,7 @@ class MtnRangeRepository {
     private val _mtnRanges = MutableLiveData<List<MtnRange>>()
     val mtnRanges: LiveData<List<MtnRange>> = _mtnRanges
 
-    init {
-        fetchMtnRanges()
-    }
-
-    private fun fetchMtnRanges() {
+    fun fetchMtnRanges() {
 
         RestApi.gotApi.getMtnRanges().enqueue(object : Callback<List<MtnRange>> {
             override fun onFailure(call: Call<List<MtnRange>>, t: Throwable) {

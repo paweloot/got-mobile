@@ -11,4 +11,8 @@ class MtnRangeViewModel : ViewModel() {
         MtnRangeRepository()
 
     val mtnRanges: LiveData<List<MtnRange>> = mtnRangeRepository.mtnRanges
+
+    init {
+        mtnRangeRepository.fetchMtnRanges()
+    }
 }
