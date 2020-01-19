@@ -3,7 +3,7 @@ package com.paweloot.gotmobile.model.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.paweloot.gotmobile.api.RetrofitApi
+import com.paweloot.gotmobile.api.RestApi
 import com.paweloot.gotmobile.model.entity.Tourist
 import com.paweloot.gotmobile.utility.Hasher
 import retrofit2.Call
@@ -21,7 +21,7 @@ class UserRepository {
 
         val encodedPassword = Hasher().hash(password)
 
-        RetrofitApi.gotApi.authorizeTourist(email, encodedPassword)
+        RestApi.gotApi.authorizeTourist(email, encodedPassword)
             .enqueue(object : Callback<Tourist> {
                 override fun onFailure(call: Call<Tourist>, t: Throwable) {
                     Log.d(TAG, "onFailure: Failed to authorize a tourist $email: $t")

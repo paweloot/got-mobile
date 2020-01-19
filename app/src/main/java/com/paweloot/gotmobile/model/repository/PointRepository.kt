@@ -3,7 +3,7 @@ package com.paweloot.gotmobile.model.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.paweloot.gotmobile.api.RetrofitApi
+import com.paweloot.gotmobile.api.RestApi
 import com.paweloot.gotmobile.model.entity.MtnGroup
 import com.paweloot.gotmobile.model.entity.Point
 import retrofit2.Call
@@ -33,7 +33,7 @@ class PointRepository {
      */
     fun fetchPoints(mtnGroup: MtnGroup) {
 
-        RetrofitApi.gotApi.getPoints(mtnGroup.id).enqueue(object : Callback<List<Point>> {
+        RestApi.gotApi.getPoints(mtnGroup.id).enqueue(object : Callback<List<Point>> {
             override fun onFailure(call: Call<List<Point>>, t: Throwable) {
                 Log.d(TAG, "onFailure: Failed to fetch Points: $t")
             }
@@ -53,7 +53,7 @@ class PointRepository {
      */
     fun filterPoints(pointFrom: Point) {
 
-        RetrofitApi.gotApi.getFilteredPoints(pointFrom.id).enqueue(object : Callback<List<Point>> {
+        RestApi.gotApi.getFilteredPoints(pointFrom.id).enqueue(object : Callback<List<Point>> {
             override fun onFailure(call: Call<List<Point>>, t: Throwable) {
                 Log.d(TAG, "onFailure: Failed to fetch filtered Points: $t")
             }

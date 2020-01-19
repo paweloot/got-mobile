@@ -3,7 +3,7 @@ package com.paweloot.gotmobile.model.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.paweloot.gotmobile.api.RetrofitApi
+import com.paweloot.gotmobile.api.RestApi
 import com.paweloot.gotmobile.model.entity.Point
 import com.paweloot.gotmobile.model.entity.SummaryPath
 import retrofit2.Call
@@ -18,7 +18,7 @@ class SummaryPathRepository {
     val summaryPaths: LiveData<List<SummaryPath>> = _summaryPaths
 
     fun fetchSummaryPaths(pathPoints: List<Point>) {
-        RetrofitApi.gotApi.getSummaryPaths(pathPoints.map { point -> point.id }).enqueue(object :
+        RestApi.gotApi.getSummaryPaths(pathPoints.map { point -> point.id }).enqueue(object :
             Callback<List<SummaryPath>> {
 
             override fun onFailure(call: Call<List<SummaryPath>>, t: Throwable) {

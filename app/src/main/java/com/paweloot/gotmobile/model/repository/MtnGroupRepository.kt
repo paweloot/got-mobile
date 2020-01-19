@@ -3,7 +3,7 @@ package com.paweloot.gotmobile.model.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.paweloot.gotmobile.api.RetrofitApi
+import com.paweloot.gotmobile.api.RestApi
 import com.paweloot.gotmobile.model.entity.MtnGroup
 import com.paweloot.gotmobile.model.entity.MtnRange
 import retrofit2.Call
@@ -19,7 +19,7 @@ class MtnGroupRepository {
 
     fun fetchMtnGroups(mtnRange: MtnRange) {
 
-        RetrofitApi.gotApi.getMtnGroups(mtnRange.id).enqueue(object : Callback<List<MtnGroup>> {
+        RestApi.gotApi.getMtnGroups(mtnRange.id).enqueue(object : Callback<List<MtnGroup>> {
             override fun onFailure(call: Call<List<MtnGroup>>, t: Throwable) {
                 Log.d(TAG, "onFailure: Failed to fetch MtnGroups: $t")
                 _mtnGroups.value = null

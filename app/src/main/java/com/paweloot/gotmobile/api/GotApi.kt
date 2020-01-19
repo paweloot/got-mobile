@@ -108,7 +108,7 @@ private val retrofit = Retrofit.Builder()
 /**
  * Singleton przechowujący obiekt do komunikacji z REST API.
  */
-object RetrofitApi {
+object RestApi {
 
     /**
      * Obiekt wygenerowany przez bibliotekę Retrofit, służący do
