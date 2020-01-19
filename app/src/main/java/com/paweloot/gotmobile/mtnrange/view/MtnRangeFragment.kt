@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paweloot.gotmobile.AppViewModel
+import com.paweloot.gotmobile.MainActivity
 import com.paweloot.gotmobile.R
 import com.paweloot.gotmobile.databinding.FragmentMtnRangeBinding
 import com.paweloot.gotmobile.mtnrange.MtnRangeViewModel
@@ -43,7 +44,8 @@ class MtnRangeFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(
             this, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    showLogOutAlert()
+                    val activity = requireActivity() as MainActivity
+                    activity.showLogOutAlert()
                 }
             })
 
@@ -70,22 +72,5 @@ class MtnRangeFragment : Fragment() {
                 }
             }
         })
-    }
-
-    private fun showLogOutAlert() {
-        val alert = AlertDialog.Builder(context)
-            .setMessage("Ta akcja spowoduje wylogowanie. Na pewno chcesz kontynuować?")
-            .setPositiveButton("Tak") { dialogInterface, _ ->
-                appViewModel.logOutTourist()
-                dialogInterface.dismiss()
-
-                appViewModel.newDestination.value =
-                    MtnRangeFragmentDirections.actionMtnRangeFragmentToLoginFragment().actionId
-            }
-            .setNegativeButton("Nie") { dialogInterface, _ ->
-                dialogInterface.dismiss()
-            }
-
-        alert.show()
     }
 }
