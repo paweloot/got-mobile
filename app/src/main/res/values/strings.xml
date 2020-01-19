@@ -27,4 +27,5 @@
     <string name="haslo_hint">Hasło</string>
     <string name="button_login">Zaloguj</string>
     <string name="login_screen_title">Zaloguj się</string>
+    <string name="login_failure_message">Podane dane są nieprawidłowe, spróbuj ponownie!</string>
 </resources>

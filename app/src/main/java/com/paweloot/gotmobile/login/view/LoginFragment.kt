@@ -1,4 +1,4 @@
-package com.paweloot.gotmobile.login
+package com.paweloot.gotmobile.login.view
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.paweloot.gotmobile.AppViewModel
 import com.paweloot.gotmobile.R
+import com.paweloot.gotmobile.login.LoginFragmentDirections
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {
@@ -66,12 +67,13 @@ class LoginFragment : Fragment() {
 
     private fun onLoginSuccessful() {
         viewModel.newDestination.value =
-            LoginFragmentDirections.actionLoginFragmentToMtnRangeFragment().actionId
+            LoginFragmentDirections.actionLoginFragmentToMtnRangeFragment()
+                .actionId
     }
 
     private fun showFailureAlert() {
         val dialog = AlertDialog.Builder(context)
-            .setMessage("Błędne hasło, spróbuj ponownie!")
+            .setMessage(getString(R.string.login_failure_message))
             .setPositiveButton(R.string.button_continue) { dialogInterface, _ ->
                 dialogInterface.dismiss()
             }

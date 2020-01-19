@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.paweloot.gotmobile.login.LoginFragment"
+        android:name="com.paweloot.gotmobile.login.view.LoginFragment"
         android:label="GOT Mobile"
         tools:layout="@layout/fragment_login">
         <action
