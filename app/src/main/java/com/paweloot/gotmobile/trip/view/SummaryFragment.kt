@@ -38,6 +38,7 @@ class SummaryFragment(private val viewModel: TripViewModel) : Fragment() {
     private fun observeSummaryPaths() {
         viewModel.summaryPaths.observe(this, Observer { summaryPaths ->
             summary_path_list.adapter = PathAdapter(summaryPaths)
+            got_points.text = summaryPaths.sumBy { sp -> sp.points }.toString()
         })
     }
 }
