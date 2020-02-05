@@ -8,10 +8,6 @@
         <variable
             name="mtnGroup"
             type="com.paweloot.gotmobile.model.entity.MtnGroup" />
-
-        <variable
-            name="handler"
-            type="com.paweloot.gotmobile.mtngroup.view.OnClickHandler" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -21,7 +17,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:onClick="@{handler::onMtnRangeClicked}"
         app:cardElevation="4dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
